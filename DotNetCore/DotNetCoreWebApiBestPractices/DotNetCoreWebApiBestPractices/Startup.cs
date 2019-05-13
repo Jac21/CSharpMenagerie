@@ -45,9 +45,11 @@ namespace DotNetCoreWebApiBestPractices
             services.ConfigureCors();
             services.ConfigureAuthentication();
             services.AddScoped<ModelValidationAttribute>();
-            
-            //Add http client services at ConfigureServices(IServiceCollection services) 
-            services.AddHttpClient<IOrderService, OrderService>();
+
+            // Add http client services at ConfigureServices(IServiceCollection services) 
+            // Set 5 min as the lifetime for the HttpMessageHandler objects in the pool used 
+            services.AddHttpClient<IOrderService, OrderService>()
+                .SetHandlerLifetime(TimeSpan.FromMinutes(5));
 
             CheckMissingDependenciesOnStartup(services);
         }
