@@ -12,6 +12,7 @@ namespace DotNetCoreWebApiBestPractices.Services.Implementations
         public OrderService(HttpClient httpClient)
         {
             _httpClient = httpClient;
+            _remoteServiceBaseUrl = "https://www.jeremycantu.com";
         }
 
         public async Task PlaceOrderAsync()
