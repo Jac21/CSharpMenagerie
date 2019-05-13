@@ -3,6 +3,8 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using DotNetCoreWebApiBestPractices.Pages;
+using DotNetCoreWebApiBestPractices.Services.Implementations;
+using DotNetCoreWebApiBestPractices.Services.Interfaces;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics;
@@ -43,6 +45,9 @@ namespace DotNetCoreWebApiBestPractices
             services.ConfigureCors();
             services.ConfigureAuthentication();
             services.AddScoped<ModelValidationAttribute>();
+            
+            //Add http client services at ConfigureServices(IServiceCollection services) 
+            services.AddHttpClient<IOrderService, OrderService>();
 
             CheckMissingDependenciesOnStartup(services);
         }
