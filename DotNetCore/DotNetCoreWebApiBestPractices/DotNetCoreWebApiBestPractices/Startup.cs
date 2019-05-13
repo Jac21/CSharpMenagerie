@@ -60,11 +60,14 @@ namespace DotNetCoreWebApiBestPractices
 
         private static IAsyncPolicy<HttpResponseMessage> GetRetryPolicy()
         {
+            Random jitterer = new Random();
+
             return HttpPolicyExtensions
                 .HandleTransientHttpError()
                 .OrResult(msg => msg.StatusCode == System.Net.HttpStatusCode.NotFound)
-                .WaitAndRetryAsync(6, retryAttempt => TimeSpan.FromSeconds(Math.Pow(2,
-                                                                            retryAttempt)));
+                // exponential back-off plus some jitter
+                .WaitAndRetryAsync(6, retryAttempt => 
+                    TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)) + TimeSpan.FromMilliseconds(jitterer.Next(0, 100)));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
