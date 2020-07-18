@@ -30,6 +30,15 @@ namespace MagicalMethods
             {
                 myList
             };
+
+            var headers = new HttpHeaders
+            {
+                ["access-control-allow-origin"] = "*",
+                ["cache-control"] = "max-age=315360000, public, immutable"
+            };
+
+            var point = new Point(12, 24);
+            var (x, y) = point;
         }
     }
 }
