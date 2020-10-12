@@ -18,10 +18,11 @@ namespace BenchmarkDotNetDeepDive
     [SimpleJob(RunStrategy.Throughput)] // set run strategy
     public class Md5VersusSha256Benchmark
     {
-        private readonly SHA256 _sha256;
-        private readonly MD5 _md5;
+        private SHA256 _sha256;
+        private MD5 _md5;
 
-        public Md5VersusSha256Benchmark()
+        [GlobalSetup]
+        public void Setup()
         {
             _sha256 = SHA256.Create();
             _md5 = MD5.Create();
