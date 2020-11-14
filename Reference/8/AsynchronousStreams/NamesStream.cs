@@ -4,9 +4,9 @@ using System.Threading.Tasks;
 
 namespace _8.AsynchronousStreams
 {
-    public class AsyncStreamsExample
+    public class NamesStream
     {
-        private async IAsyncEnumerable<string> GetNamesAsync()
+        public async IAsyncEnumerable<string> GetNamesAsync()
         {
             string[] names =
             {

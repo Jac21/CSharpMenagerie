@@ -21,8 +21,8 @@ namespace _8
             traceLogger.WriteError("Error!");
 
             // asynchronous streams
-            var asyncStreams = new AsyncStreamsExample();
-            await asyncStreams.ConsumeStream();
+            var namesStream = new NamesStream();
+            await namesStream.ConsumeStream();
 
             Console.ReadLine();
         }
