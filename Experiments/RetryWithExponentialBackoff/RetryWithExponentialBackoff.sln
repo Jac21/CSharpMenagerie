@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31005.135
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RetryWithExponentialBackoff", "RetryWithExponentialBackoff.csproj", "{CED9731F-DF76-4DAA-A4DF-8517B2D7A67B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RetryWithExponentialBackoff.Unit.Tests", "..\RetryWithExponentialBackoff.Unit.Tests\RetryWithExponentialBackoff.Unit.Tests.csproj", "{25867E03-0C67-4A7D-AE06-15D334599F5D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CED9731F-DF76-4DAA-A4DF-8517B2D7A67B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CED9731F-DF76-4DAA-A4DF-8517B2D7A67B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CED9731F-DF76-4DAA-A4DF-8517B2D7A67B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CED9731F-DF76-4DAA-A4DF-8517B2D7A67B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{25867E03-0C67-4A7D-AE06-15D334599F5D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{25867E03-0C67-4A7D-AE06-15D334599F5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{25867E03-0C67-4A7D-AE06-15D334599F5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{25867E03-0C67-4A7D-AE06-15D334599F5D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7AE2251D-77AD-4C3B-B769-9ADA1F0BC8E8}
+	EndGlobalSection
+EndGlobal
