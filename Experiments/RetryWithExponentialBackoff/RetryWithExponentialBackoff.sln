@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RetryWithExponentialBackoff
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RetryWithExponentialBackoff.Unit.Tests", "..\RetryWithExponentialBackoff.Unit.Tests\RetryWithExponentialBackoff.Unit.Tests.csproj", "{25867E03-0C67-4A7D-AE06-15D334599F5D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RetryWithExponentialBackoff.Benchmarks", "..\RetryWithExponentialBackoff.Benchmarks\RetryWithExponentialBackoff.Benchmarks.csproj", "{932A8BA9-611F-4853-9E10-31B4ABF84605}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{25867E03-0C67-4A7D-AE06-15D334599F5D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{25867E03-0C67-4A7D-AE06-15D334599F5D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{25867E03-0C67-4A7D-AE06-15D334599F5D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{932A8BA9-611F-4853-9E10-31B4ABF84605}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{932A8BA9-611F-4853-9E10-31B4ABF84605}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{932A8BA9-611F-4853-9E10-31B4ABF84605}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{932A8BA9-611F-4853-9E10-31B4ABF84605}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
