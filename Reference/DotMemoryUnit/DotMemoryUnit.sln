@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31005.135
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotMemoryUnit", "DotMemoryUnit.csproj", "{02141A86-570E-4837-83CD-1E17158D89B1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotMemoryUnit.Unit.Tests", "..\DotMemoryUnit.Unit.Tests\DotMemoryUnit.Unit.Tests.csproj", "{AA3EB167-F96C-47C2-A813-0BD6CCEBA2AB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{02141A86-570E-4837-83CD-1E17158D89B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02141A86-570E-4837-83CD-1E17158D89B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02141A86-570E-4837-83CD-1E17158D89B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02141A86-570E-4837-83CD-1E17158D89B1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AA3EB167-F96C-47C2-A813-0BD6CCEBA2AB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AA3EB167-F96C-47C2-A813-0BD6CCEBA2AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AA3EB167-F96C-47C2-A813-0BD6CCEBA2AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AA3EB167-F96C-47C2-A813-0BD6CCEBA2AB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6787A8EA-1FAE-4CCF-89F7-91A5CC5DC30C}
+	EndGlobalSection
+EndGlobal
