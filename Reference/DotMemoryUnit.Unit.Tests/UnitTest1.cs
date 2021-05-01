@@ -12,7 +12,7 @@ namespace DotMemoryUnit.Unit.Tests
         }
 
         [Test]
-        public void CheckForObjects_Test()
+        public void DotMemoryUnit_CheckForObjects_Success_Test()
         {
             dotMemory.Check(memory =>
             {
@@ -24,7 +24,7 @@ namespace DotMemoryUnit.Unit.Tests
 
         [DotMemoryUnit(CollectAllocations = true)]
         [Test]
-        public void CheckMemoryTraffic_Test()
+        public void DotMemoryUnit_CheckMemoryTraffic_Success_Test()
         {
             var memoryCheckPointOne = dotMemory.Check();
 
@@ -40,6 +40,29 @@ namespace DotMemoryUnit.Unit.Tests
                 Assert.That(memory.GetTrafficFrom(memoryCheckPointOne)
                     .Where(obj => obj.Type.Is<List<string>>())
                     .AllocatedMemory.SizeInBytes, Is.LessThan(2048));
+            });
+        }
+
+        [DotMemoryUnit(CollectAllocations = true, SavingStrategy = SavingStrategy.OnAnyFail,
+            Directory = @"C:\tmp\DotMemoryUnit", WorkspaceNumberLimit = 1)]
+        [Test]
+        public void DotMemoryUnit_CompareSnapshots_Success_Test()
+        {
+            var memoryCheckPoint = dotMemory.Check();
+
+            var stringList = new List<string>();
+
+            for (var i = 0; i < 10_000; i++)
+            {
+                stringList.Add(i.ToString());
+            }
+
+            dotMemory.Check(memory =>
+            {
+                Assert.That(memory.GetDifference(memoryCheckPoint)
+                    .GetSurvivedObjects()
+                    .GetObjects(where => where.Type.Is<List<string>>())
+                    .ObjectsCount, Is.LessThan(15));
             });
         }
     }
