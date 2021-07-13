@@ -4,7 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Confluent.Kafka;
 
-namespace ReliableKafkaProducer
+namespace ReliableKafkaProducer.Core
 {
     public class Producer
     {
