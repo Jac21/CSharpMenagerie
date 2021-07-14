@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using Confluent.Kafka;
 using Confluent.Kafka.Admin;
+using Confluent.Kafka.SyncOverAsync;
 using Confluent.SchemaRegistry;
 using Confluent.SchemaRegistry.Serdes;
 using ReliableKafkaProducer.Core;
@@ -12,8 +14,19 @@ using ReliableKafkaProducer.Models;
 
 namespace ReliableKafkaProducer
 {
+    /// <summary>
+    /// https://github.com/confluentinc/confluent-kafka-dotnet
+    /// https://github.com/rahulrai-in/kafka-lms
+    /// </summary>
     public class Program
     {
+        public struct KafkaMessage
+        {
+            public string Key;
+            public int Partition;
+            public LeaveApplicationReceived Message;
+        };
+
         public static async Task Main(string[] args)
         {
             Console.WriteLine("Hello, Kafka!");
@@ -28,24 +41,7 @@ namespace ReliableKafkaProducer
                 Url = "http://127.0.0.1:8081"
             };
 
-            var producerConfig = new ProducerConfig
-            {
-                BootstrapServers = "127.0.0.1:9092",
-                // Guarantees delivery of message to topic.
-                EnableDeliveryReports = true,
-                ClientId = Dns.GetHostName()
-            };
-
-            var consumerConfig = new ConsumerConfig
-            {
-                BootstrapServers = "127.0.0.1:9092",
-                GroupId = "manager",
-                EnableAutoCommit = false,
-                EnableAutoOffsetStore = false,
-                // Read messages from start if no commit exists.
-                AutoOffsetReset = AutoOffsetReset.Earliest,
-                MaxPollIntervalMs = 10000
-            };
+            var leaveApplicationRecievedMessages = new Queue<KafkaMessage>();
 
             using var adminClient = new AdminClientBuilder(adminConfig).Build();
 
@@ -69,6 +65,30 @@ namespace ReliableKafkaProducer
 
             // access the schema registry
             using var schemaRegistry = new CachedSchemaRegistryClient(schemaRegistryConfig);
+
+            switch (args.FirstOrDefault())
+            {
+                case "p":
+                    await InitiateProducer(schemaRegistry);
+                    break;
+                case "c":
+                    InitiateConsumer(schemaRegistry, leaveApplicationRecievedMessages);
+                    break;
+                default:
+                    Console.WriteLine("Enter either 'p' to initiate producer, or 'c' to initiate consumer");
+                    break;
+            }
+        }
+
+        private static async Task InitiateProducer(ISchemaRegistryClient schemaRegistry)
+        {
+            var producerConfig = new ProducerConfig
+            {
+                BootstrapServers = "127.0.0.1:9092",
+                // Guarantees delivery of message to topic.
+                EnableDeliveryReports = true,
+                ClientId = Dns.GetHostName()
+            };
 
             // embed Avro serializers into the producer instance
             using var producer = new ProducerBuilder<string, LeaveApplicationReceived>(producerConfig)
@@ -102,6 +122,73 @@ namespace ReliableKafkaProducer
 
                 Console.WriteLine(
                     $"\nMsg: Your leave request is queued at offset {result.Offset.Value} in the Topic {result.Topic}:{result.Partition.Value}\n\n");
+            }
+        }
+
+        private static void InitiateConsumer(ISchemaRegistryClient schemaRegistry,
+            Queue<KafkaMessage> leaveApplicationRecievedMessages)
+        {
+            var consumerConfig = new ConsumerConfig
+            {
+                BootstrapServers = "127.0.0.1:9092",
+                GroupId = "manager",
+                EnableAutoCommit = false,
+                EnableAutoOffsetStore = false,
+                // Read messages from start if no commit exists.
+                AutoOffsetReset = AutoOffsetReset.Earliest,
+                MaxPollIntervalMs = 10000
+            };
+
+            // embed Avro serializers into the consumer instance
+            using var consumer = new ConsumerBuilder<string, LeaveApplicationReceived>(consumerConfig)
+                .SetKeyDeserializer(new AvroDeserializer<string>(schemaRegistry).AsSyncOverAsync())
+                .SetValueDeserializer(new AvroDeserializer<LeaveApplicationReceived>(schemaRegistry).AsSyncOverAsync())
+                .SetErrorHandler((_, e) => Console.WriteLine($"Errpr: {e.Reason}"))
+                .Build();
+
+            try
+            {
+                consumer.Subscribe("leave-applications");
+                Console.WriteLine("Consumer loop started...\n");
+
+                while (true)
+                {
+                    try
+                    {
+                        // We will give the process 1 second to commit the message and store its offset.
+                        var result =
+                            consumer.Consume(
+                                TimeSpan.FromMilliseconds((double) (consumerConfig.MaxPollIntervalMs - 1000)));
+
+                        var leaveRequest = result?.Message?.Value;
+
+                        if (leaveRequest == null)
+                        {
+                            continue;
+                        }
+
+                        // Adding message to a list just for the demo.
+                        // You should persist the message in database and process it later.
+                        leaveApplicationRecievedMessages.Enqueue(new KafkaMessage()
+                        {
+                            Key = result.Message.Key,
+                            Message = result.Message.Value,
+                            Partition = result.Partition.Value
+                        });
+
+                        // ensure we don't end up processing several messages again after disruption
+                        consumer.Commit(result);
+                        consumer.StoreOffset(result);
+                    }
+                    catch (ConsumeException e) when (!e.Error.IsFatal)
+                    {
+                        Console.WriteLine($"Non fatal error: {e}");
+                    }
+                }
+            }
+            finally
+            {
+                consumer.Close();
             }
         }
     }
