@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31205.134
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicroUserService", "MicroUserService.csproj", "{07095C89-B198-45F2-9704-F57872A28019}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicroPostService", "..\MicroPostService\MicroPostService.csproj", "{92B13B4F-9DDD-4D46-9751-421EAC0E01AF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{07095C89-B198-45F2-9704-F57872A28019}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{07095C89-B198-45F2-9704-F57872A28019}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{07095C89-B198-45F2-9704-F57872A28019}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{07095C89-B198-45F2-9704-F57872A28019}.Release|Any CPU.Build.0 = Release|Any CPU
+		{92B13B4F-9DDD-4D46-9751-421EAC0E01AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92B13B4F-9DDD-4D46-9751-421EAC0E01AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92B13B4F-9DDD-4D46-9751-421EAC0E01AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92B13B4F-9DDD-4D46-9751-421EAC0E01AF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {ADFAEA4C-0432-4CF9-A44F-7CD59F25FE42}
+	EndGlobalSection
+EndGlobal
