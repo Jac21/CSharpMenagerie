@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MicroUserService.Data;
 using MicroUserService.Entities;
+using MicroUserService.Queues;
+using Newtonsoft.Json;
 
 namespace MicroUserService.Controllers
 {
@@ -12,10 +14,12 @@ namespace MicroUserService.Controllers
     public class UsersController : ControllerBase
     {
         private readonly UserServiceContext _context;
+        private readonly IQueueService _queueService;
 
-        public UsersController(UserServiceContext context)
+        public UsersController(UserServiceContext context, IQueueService queueService)
         {
             _context = context;
+            _queueService = queueService;
         }
 
         [HttpGet]
@@ -28,8 +32,13 @@ namespace MicroUserService.Controllers
         public async Task<IActionResult> PutUser(int id, User user)
         {
             _context.Entry(user).State = EntityState.Modified;
-
             await _context.SaveChangesAsync();
+
+            _queueService.PublishToMessageQueue("user.update", JsonConvert.SerializeObject(new
+            {
+                id = user.ID,
+                newname = user.Name
+            }));
 
             return NoContent();
         }
@@ -38,8 +47,13 @@ namespace MicroUserService.Controllers
         public async Task<ActionResult<User>> PostUser(User user)
         {
             _context.User.Add(user);
-
             await _context.SaveChangesAsync();
+
+            _queueService.PublishToMessageQueue("user.add", JsonConvert.SerializeObject(new
+            {
+                id = user.ID,
+                name = user.Name
+            }));
 
             return CreatedAtAction("GetUser", new {id = user.ID}, user);
         }
@@ -59,6 +73,15 @@ namespace MicroUserService.Controllers
             {
                 return NotFound();
             }
+
+            _context.User.Remove(user);
+            await _context.SaveChangesAsync();
+
+            _queueService.PublishToMessageQueue("user.delete", JsonConvert.SerializeObject(new
+            {
+                id = user.ID,
+                name = user.Name
+            }));
 
             return NoContent();
         }

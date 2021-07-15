@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using MicroUserService.Data;
+using MicroUserService.Queues;
 
 namespace MicroUserService
 {
@@ -29,6 +30,8 @@ namespace MicroUserService
 
             services.AddDbContext<UserServiceContext>(options =>
                 options.UseSqlite(@"Data Source=user.db"));
+
+            services.AddSingleton<IQueueService, RabbitMqService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
