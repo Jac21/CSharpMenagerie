@@ -10,5 +10,6 @@ namespace MicroUserService.Data
         }
 
         public DbSet<User> User { get; set; }
+        public DbSet<IntegrationEvent> IntegrationEventOutbox { get; set; }
     }
 }

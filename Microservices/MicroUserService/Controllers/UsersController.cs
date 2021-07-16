@@ -31,14 +31,29 @@ namespace MicroUserService.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutUser(int id, User user)
         {
+            await using var transaction = _context.Database.BeginTransaction();
+
             _context.Entry(user).State = EntityState.Modified;
             await _context.SaveChangesAsync();
 
-            _queueService.PublishToMessageQueue("user.update", JsonConvert.SerializeObject(new
+            _context.IntegrationEventOutbox.Add(new IntegrationEvent
             {
-                id = user.ID,
-                newname = user.Name
-            }));
+                Event = "user.update",
+                Data = JsonConvert.SerializeObject(new
+                {
+                    id = user.ID,
+                    newname = user.Name
+                })
+            });
+
+            //_queueService.PublishToMessageQueue("user.update", JsonConvert.SerializeObject(new
+            //{
+            //    id = user.ID,
+            //    newname = user.Name
+            //}));
+
+            await _context.SaveChangesAsync();
+            await transaction.CommitAsync();
 
             return NoContent();
         }
@@ -46,14 +61,30 @@ namespace MicroUserService.Controllers
         [HttpPost]
         public async Task<ActionResult<User>> PostUser(User user)
         {
+            await using var transaction = _context.Database.BeginTransaction();
+
             _context.User.Add(user);
             await _context.SaveChangesAsync();
 
-            _queueService.PublishToMessageQueue("user.add", JsonConvert.SerializeObject(new
-            {
-                id = user.ID,
-                name = user.Name
-            }));
+            _context.IntegrationEventOutbox.Add(
+                new IntegrationEvent
+                {
+                    Event = "user.add",
+                    Data = JsonConvert.SerializeObject(new
+                    {
+                        id = user.ID,
+                        name = user.Name
+                    })
+                });
+
+            //_queueService.PublishToMessageQueue("user.add", JsonConvert.SerializeObject(new
+            //{
+            //    id = user.ID,
+            //    name = user.Name
+            //}));
+
+            await _context.SaveChangesAsync();
+            await transaction.CommitAsync();
 
             return CreatedAtAction("GetUser", new {id = user.ID}, user);
         }
