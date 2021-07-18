@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using MicroUserService.Data;
 using MicroUserService.Entities;
 using MicroUserService.Queues;
+using MicroUserService.Services;
 using Newtonsoft.Json;
 
 namespace MicroUserService.Controllers
@@ -15,11 +16,14 @@ namespace MicroUserService.Controllers
     {
         private readonly UserServiceContext _context;
         private readonly IQueueService _queueService;
+        private readonly IntegrationEventSenderService _integrationEventSenderService;
 
-        public UsersController(UserServiceContext context, IQueueService queueService)
+        public UsersController(UserServiceContext context, IQueueService queueService,
+            IntegrationEventSenderService integrationEventSenderService)
         {
             _context = context;
             _queueService = queueService;
+            _integrationEventSenderService = integrationEventSenderService;
         }
 
         [HttpGet]
@@ -54,6 +58,7 @@ namespace MicroUserService.Controllers
 
             await _context.SaveChangesAsync();
             await transaction.CommitAsync();
+            _integrationEventSenderService.StartPublishingOutstandingIntegrationEvents();
 
             return NoContent();
         }
@@ -61,6 +66,7 @@ namespace MicroUserService.Controllers
         [HttpPost]
         public async Task<ActionResult<User>> PostUser(User user)
         {
+            user.Version = 1;
             await using var transaction = _context.Database.BeginTransaction();
 
             _context.User.Add(user);
@@ -73,7 +79,8 @@ namespace MicroUserService.Controllers
                     Data = JsonConvert.SerializeObject(new
                     {
                         id = user.ID,
-                        name = user.Name
+                        name = user.Name,
+                        version = user.Version
                     })
                 });
 
@@ -85,6 +92,8 @@ namespace MicroUserService.Controllers
 
             await _context.SaveChangesAsync();
             await transaction.CommitAsync();
+
+            _integrationEventSenderService.StartPublishingOutstandingIntegrationEvents();
 
             return CreatedAtAction("GetUser", new {id = user.ID}, user);
         }

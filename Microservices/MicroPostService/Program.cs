@@ -8,9 +8,11 @@ using MicroPostService.Entities;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Linq;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
+using static System.Console;
 
 namespace MicroPostService
 {
@@ -48,21 +50,39 @@ namespace MicroPostService
                 switch (type)
                 {
                     case "user.add":
-                        dbContext.User.Add(new User
+                        if (dbContext.User.Any(u => u.Id == data["id"].Value<int>()))
                         {
-                            Id = data["id"].Value<int>(),
-                            Name = data["name"].Value<string>()
-                        });
+                            WriteLine("Ignoring old/duplicate entry");
+                        }
+                        else
+                        {
+                            dbContext.User.Add(new User
+                            {
+                                Id = data["id"].Value<int>(),
+                                Name = data["name"].Value<string>(),
+                                Version = data["version"].Value<int>()
+                            });
+                        }
 
                         await dbContext.SaveChangesAsync();
 
                         break;
                     case "user.update":
+                        var newVersion = data["version"].Value<int>();
+
                         var user = dbContext.User.First(a => a.Id == data["id"].Value<int>());
 
-                        user.Name = data["newname"].Value<string>();
+                        if (user.Version >= newVersion)
+                        {
+                            WriteLine("Ignoring old/duplicate entity");
+                        }
+                        else
+                        {
+                            user.Name = data["newname"].Value<string>();
+                            user.Version = newVersion;
 
-                        await dbContext.SaveChangesAsync();
+                            await dbContext.SaveChangesAsync();
+                        }
 
                         break;
                     case "user.delete":
@@ -74,16 +94,26 @@ namespace MicroPostService
 
                         break;
                     default:
-                        Console.WriteLine($"Unknown message: {type}");
+                        WriteLine($"Unknown message: {type}");
                         break;
                 }
+
+                channel.BasicAck(ea.DeliveryTag, false);
             };
 
-            channel.BasicConsume("user.postservice", true, consumer);
+            channel.BasicConsume("user.postservice", false, consumer);
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
+                .ConfigureLogging(logging =>
+                {
+                    // clear default logging providers
+                    logging.ClearProviders();
+
+                    logging.AddConsole();
+                    logging.AddDebug();
+                })
                 .ConfigureWebHostDefaults(webBuilder => { webBuilder.UseStartup<Startup>(); });
     }
 }
