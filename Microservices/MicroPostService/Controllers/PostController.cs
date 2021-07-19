@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using MicroPostService.Data;
 using MicroPostService.Entities;
-using Microsoft.EntityFrameworkCore;
 
 namespace MicroPostService.Controllers
 {
@@ -11,26 +10,31 @@ namespace MicroPostService.Controllers
     [ApiController]
     public class PostController : ControllerBase
     {
-        private readonly PostServiceContext _context;
+        private readonly DataAccess _dataAccess;
 
-        public PostController(PostServiceContext context)
+        public PostController(DataAccess dataAccess)
         {
-            _context = context;
+            _dataAccess = dataAccess;
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Post>>> GetPost()
+        public async Task<ActionResult<IEnumerable<Post>>> GetLatestPosts(string category, int count)
         {
-            return await _context.Post.Include(x => x.User).ToListAsync();
+            return await _dataAccess.ReadLatestPosts(category, count);
         }
 
         [HttpPost]
         public async Task<ActionResult<Post>> PostPost(Post post)
         {
-            _context.Post.Add(post);
-            await _context.SaveChangesAsync();
+            await _dataAccess.CreatePost(post);
 
-            return CreatedAtAction("GetPost", new {id = post.PostId}, post);
+            return CreatedAtAction($"{nameof(PostPost)}", new {id = post.PostId}, post);
+        }
+
+        [HttpGet("InitDatabase")]
+        public void InitDatabase([FromQuery] int countUsers, [FromQuery] int countCategories)
+        {
+            _dataAccess.InitDatabase(countUsers, countCategories);
         }
     }
 }

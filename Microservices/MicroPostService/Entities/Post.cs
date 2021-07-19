@@ -1,5 +1,9 @@
+using System.ComponentModel.DataAnnotations;
+using Microsoft.EntityFrameworkCore;
+
 namespace MicroPostService.Entities
 {
+    [Index(nameof(PostId), nameof(CategoryId))]
     public class Post
     {
         public int PostId { get; set; }
@@ -8,5 +12,8 @@ namespace MicroPostService.Entities
 
         public int UserId { get; set; }
         public User User { get; set; }
+
+        [Required] public string CategoryId { get; set; }
+        public Category Category { get; set; }
     }
 }

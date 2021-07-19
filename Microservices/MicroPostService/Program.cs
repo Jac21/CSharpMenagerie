@@ -20,7 +20,8 @@ namespace MicroPostService
     {
         public static async Task Main(string[] args)
         {
-            await ListenForIntegrationEvents();
+            // TODO
+            //await ListenForIntegrationEvents();
 
             CreateHostBuilder(args).Build().Run();
         }
@@ -34,74 +35,76 @@ namespace MicroPostService
 
             consumer.Received += async (model, ea) =>
             {
-                var contextOptions = new DbContextOptionsBuilder<PostServiceContext>()
-                    .UseSqlite(@"Data Source=post.db")
-                    .Options;
+                // TODO - Initialize/handle per context
+                var dbContext = new PostServiceContext(string.Empty);
 
-                var dbContext = new PostServiceContext(contextOptions);
-
-                var body = ea.Body.ToArray();
-                var message = Encoding.UTF8.GetString(body);
-                Debug.WriteLine($"[x] received {message}");
-
-                var data = JObject.Parse(message);
-                var type = ea.RoutingKey;
-
-                switch (type)
-                {
-                    case "user.add":
-                        if (dbContext.User.Any(u => u.Id == data["id"].Value<int>()))
-                        {
-                            WriteLine("Ignoring old/duplicate entry");
-                        }
-                        else
-                        {
-                            dbContext.User.Add(new User
-                            {
-                                Id = data["id"].Value<int>(),
-                                Name = data["name"].Value<string>(),
-                                Version = data["version"].Value<int>()
-                            });
-                        }
-
-                        await dbContext.SaveChangesAsync();
-
-                        break;
-                    case "user.update":
-                        var newVersion = data["version"].Value<int>();
-
-                        var user = dbContext.User.First(a => a.Id == data["id"].Value<int>());
-
-                        if (user.Version >= newVersion)
-                        {
-                            WriteLine("Ignoring old/duplicate entity");
-                        }
-                        else
-                        {
-                            user.Name = data["newname"].Value<string>();
-                            user.Version = newVersion;
-
-                            await dbContext.SaveChangesAsync();
-                        }
-
-                        break;
-                    case "user.delete":
-                        var userToDelete = dbContext.User.First(a => a.Id == data["id"].Value<int>());
-
-                        dbContext.User.Remove(userToDelete);
-
-                        await dbContext.SaveChangesAsync();
-
-                        break;
-                    default:
-                        WriteLine($"Unknown message: {type}");
-                        break;
-                }
+                await HandleReceivedEventsPerContext(ea, dbContext);
 
                 channel.BasicAck(ea.DeliveryTag, false);
             };
 
             channel.BasicConsume("user.postservice", false, consumer);
+        }
+
+        private static async Task HandleReceivedEventsPerContext(BasicDeliverEventArgs ea, PostServiceContext dbContext)
+        {
+            var body = ea.Body.ToArray();
+            var message = Encoding.UTF8.GetString(body);
+            Debug.WriteLine($"[x] received {message}");
+
+            var data = JObject.Parse(message);
+            var type = ea.RoutingKey;
+
+            switch (type)
+            {
+                case "user.add":
+                    if (dbContext.User.Any(u => u.Id == data["id"].Value<int>()))
+                    {
+                        WriteLine("Ignoring old/duplicate entry");
+                    }
+                    else
+                    {
+                        dbContext.User.Add(new User
+                        {
+                            Id = data["id"].Value<int>(),
+                            Name = data["name"].Value<string>(),
+                            Version = data["version"].Value<int>()
+                        });
+                    }
+
+                    await dbContext.SaveChangesAsync();
+
+                    break;
+                case "user.update":
+                    var newVersion = data["version"].Value<int>();
+
+                    var user = dbContext.User.First(a => a.Id == data["id"].Value<int>());
+
+                    if (user.Version >= newVersion)
+                    {
+                        WriteLine("Ignoring old/duplicate entity");
+                    }
+                    else
+                    {
+                        user.Name = data["newname"].Value<string>();
+                        user.Version = newVersion;
+
+                        await dbContext.SaveChangesAsync();
+                    }
+
+                    break;
+                case "user.delete":
+                    var userToDelete = dbContext.User.First(a => a.Id == data["id"].Value<int>());
+
+                    dbContext.User.Remove(userToDelete);
+
+                    await dbContext.SaveChangesAsync();
+
+                    break;
+                default:
+                    WriteLine($"Unknown message: {type}");
+                    break;
+            }
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>

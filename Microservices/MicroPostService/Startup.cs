@@ -5,7 +5,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using MicroPostService.Data;
-using Microsoft.EntityFrameworkCore;
 
 namespace MicroPostService
 {
@@ -27,17 +26,14 @@ namespace MicroPostService
                 c.SwaggerDoc("v1", new OpenApiInfo {Title = "MicroPostService", Version = "v1"});
             });
 
-            services.AddDbContext<PostServiceContext>(options =>
-                options.UseSqlite(@"Data Source=post.db"));
+            services.AddSingleton<DataAccess>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, PostServiceContext dbContext)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
-                dbContext.Database.EnsureCreated();
-
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "MicroPostService v1"));
