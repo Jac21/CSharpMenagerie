@@ -1,8 +1,5 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
 using System.Threading.Tasks;
 using MicroPostService.Entities;
 using Microsoft.AspNetCore.Mvc;
@@ -22,19 +19,13 @@ namespace MicroPostService.Data
         {
             _logger = logger;
 
-            var connectionStrings = configuration.GetSection("PostDbConnectionStrings");
-
-            foreach (var connectionString in connectionStrings.GetChildren())
-            {
-                _logger.LogInformation($"ConnectionString: {connectionString.Value}");
-
-                _connectionStrings.Add(connectionString.Value);
-            }
+            ConnectionUtilities.CreateConnectionStringsListFromConfiguration(configuration, _connectionStrings);
         }
 
         public async Task<ActionResult<IEnumerable<Post>>> ReadLatestPosts(string category, int count)
         {
-            await using var dbContext = new PostServiceContext(GetConnectionString(category));
+            await using var dbContext =
+                new PostServiceContext(ConnectionUtilities.GetConnectionString(_connectionStrings, category));
 
             return await dbContext.Post.OrderByDescending(p => p.PostId).Take(count).Include(x => x.User)
                 .Where(p => p.CategoryId == category).ToListAsync();
@@ -42,7 +33,8 @@ namespace MicroPostService.Data
 
         public async Task<int> CreatePost(Post post)
         {
-            await using var dbContext = new PostServiceContext(GetConnectionString(post.CategoryId));
+            await using var dbContext =
+                new PostServiceContext(ConnectionUtilities.GetConnectionString(_connectionStrings, post.CategoryId));
 
             dbContext.Post.Add(post);
 
@@ -73,17 +65,6 @@ namespace MicroPostService.Data
                     dbContext.SaveChanges();
                 }
             }
-        }
-
-        private string GetConnectionString(string category)
-        {
-            using var md5 = MD5.Create();
-
-            var hash = md5.ComputeHash(Encoding.ASCII.GetBytes(category));
-
-            var x = BitConverter.ToUInt16(hash, 0) % _connectionStrings.Count;
-
-            return _connectionStrings[x];
         }
     }
 }

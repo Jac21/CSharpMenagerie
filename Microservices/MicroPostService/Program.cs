@@ -1,12 +1,14 @@
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MicroPostService.Data;
 using MicroPostService.Entities;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json.Linq;
@@ -21,12 +23,19 @@ namespace MicroPostService
         public static async Task Main(string[] args)
         {
             // TODO
-            //await ListenForIntegrationEvents();
+            var environment = "Development"; // Environment.GetEnvironmentVariable("DOTNET_ENVIRONMENT");
+
+            var configuration = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile($"appsettings.{environment}.json", true, true)
+                .Build();
+
+            await ListenForIntegrationEvents(configuration);
 
             CreateHostBuilder(args).Build().Run();
         }
 
-        private static async Task ListenForIntegrationEvents()
+        private static async Task ListenForIntegrationEvents(IConfiguration configuration)
         {
             var factory = new ConnectionFactory();
             var connection = factory.CreateConnection();
@@ -35,8 +44,13 @@ namespace MicroPostService
 
             consumer.Received += async (model, ea) =>
             {
-                // TODO - Initialize/handle per context
-                var dbContext = new PostServiceContext(string.Empty);
+                var connectionStringsList = new List<string>();
+
+                ConnectionUtilities.CreateConnectionStringsListFromConfiguration(configuration, connectionStringsList);
+
+                // TODO - Figure out which shard to utilize from event/message
+                var dbContext =
+                    new PostServiceContext(ConnectionUtilities.GetConnectionString(connectionStringsList, "Main"));
 
                 await HandleReceivedEventsPerContext(ea, dbContext);
 
