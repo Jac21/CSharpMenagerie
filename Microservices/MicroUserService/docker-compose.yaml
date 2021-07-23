@@ -1,5 +1,19 @@
 version: '2'
 services:
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: 'my-rabbitmq'
+    ports:
+        - 5672:5672
+        - 15672:15672
+    environment:
+      - RABBITMQ_DEFAULT_USER=test
+      - RABBITMQ_DEFAULT_PASS=test
+    volumes:
+        - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
+        - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
+    networks:
+        - rabbitmq_go_net
   webservice:
     image: 'jac21/microuserservice:latest'   
     cpus: 0.5
@@ -36,4 +50,7 @@ services:
     ports:
       - 3314:3306
     environment:
-      - MYSQL_ROOT_PASSWORD=pw    
+      - MYSQL_ROOT_PASSWORD=pw
+networks:
+  rabbitmq_go_net:
+    driver: bridge

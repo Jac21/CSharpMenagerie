@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 using RabbitMQ.Client;
 
@@ -8,18 +9,26 @@ namespace MicroUserService.Queues
     {
         /// <summary>
         /// C:\dev>docker run -d  -p 15672:15672 -p 5672:5672 --hostname my-rabbit --name some-rabbit rabbitmq:3-management
+        /// username: guest
+        /// password: guest
         /// </summary>
         /// <param name="integrationEvent"></param>
         /// <param name="eventData"></param>
         public void PublishToMessageQueue(string integrationEvent, string eventData)
         {
-            // TODO: re-use and close connections, channel, etc.
             var factory = new ConnectionFactory
             {
-                HostName = "localhost"
+                UserName = "test",
+                Password = "test"
             };
 
-            using var connection = factory.CreateConnection();
+            var endpoints = new List<AmqpTcpEndpoint>
+            {
+                new AmqpTcpEndpoint("host.docker.internal"),
+                new AmqpTcpEndpoint("localhost")
+            };
+
+            var connection = factory.CreateConnection(endpoints);
 
             using var channel = connection.CreateModel();
 

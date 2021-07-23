@@ -37,8 +37,19 @@ namespace MicroPostService
 
         private static async Task ListenForIntegrationEvents(IConfiguration configuration)
         {
-            var factory = new ConnectionFactory();
-            var connection = factory.CreateConnection();
+            var factory = new ConnectionFactory
+            {
+                UserName = "test",
+                Password = "test"
+            };
+
+            var endpoints = new List<AmqpTcpEndpoint>
+            {
+                new AmqpTcpEndpoint("host.docker.internal"),
+                new AmqpTcpEndpoint("localhost")
+            };
+
+            var connection = factory.CreateConnection(endpoints);
             var channel = connection.CreateModel();
             var consumer = new EventingBasicConsumer(channel);
 
