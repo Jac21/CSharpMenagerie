@@ -1,8 +1,8 @@
-version: '2'
+version: '2.1'
 services:
   rabbitmq:
-    image: rabbitmq:3-management-alpine
-    container_name: 'my-rabbitmq'
+    image: rabbitmq:3-management
+    container_name: 'some-rabbit'
     ports:
         - 5672:5672
         - 15672:15672
@@ -18,6 +18,9 @@ services:
     image: 'jac21/microuserservice:latest'   
     cpus: 0.5
     scale: 4
+    links:
+          - rabbitmq
+    restart: on-failure
     environment:
       - PostDbConnectionStrings__Shard1=server=database0; port=3306; database=post; user=root; password=pw; Persist Security Info=False; Connect Timeout=300      
       - PostDbConnectionStrings__Shard1=server=database1; port=3306; database=post; user=root; password=pw; Persist Security Info=False; Connect Timeout=300   
