@@ -25,3 +25,6 @@
 > minikube start
 
 > kubectl get nodes
+
+> kubectl apply -f mysql.yaml
+> kubectl apply -f mongodb.yaml
