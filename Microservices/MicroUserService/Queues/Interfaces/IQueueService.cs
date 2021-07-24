@@ -1,4 +1,4 @@
-﻿namespace MicroUserService.Queues
+﻿namespace MicroUserService.Queues.Interfaces
 {
     public interface IQueueService
     {

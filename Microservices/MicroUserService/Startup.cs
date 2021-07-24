@@ -7,6 +7,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using MicroUserService.Data;
 using MicroUserService.Queues;
+using MicroUserService.Queues.Implementations;
+using MicroUserService.Queues.Interfaces;
 using MicroUserService.Services;
 
 namespace MicroUserService

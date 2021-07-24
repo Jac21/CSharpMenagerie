@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using MicroPostService.Data;
+using MicroPostService.Data.Implementations;
 using MicroPostService.Entities;
 
 namespace MicroPostService.Controllers

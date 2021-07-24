@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using MicroUserService.Data;
 using MicroUserService.Entities;
 using MicroUserService.Queues;
+using MicroUserService.Queues.Interfaces;
 using MicroUserService.Services;
 using Newtonsoft.Json;
 

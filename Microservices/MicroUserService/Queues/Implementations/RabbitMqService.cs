@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
+using MicroUserService.Queues.Interfaces;
 using RabbitMQ.Client;
 
-namespace MicroUserService.Queues
+namespace MicroUserService.Queues.Implementations
 {
     public class RabbitMqService : IQueueService
     {

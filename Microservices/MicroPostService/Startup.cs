@@ -1,10 +1,14 @@
+using MicroPostService.BackgroundServices;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
-using MicroPostService.Data;
+using MicroPostService.Data.Implementations;
+using MicroPostService.Data.Interfaces;
+using MicroPostService.QueueServices.Implementations;
+using MicroPostService.QueueServices.Interfaces;
 
 namespace MicroPostService
 {
@@ -26,7 +30,11 @@ namespace MicroPostService
                 c.SwaggerDoc("v1", new OpenApiInfo {Title = "MicroPostService", Version = "v1"});
             });
 
-            services.AddSingleton<DataAccess>();
+            services.AddSingleton<IDataAccess, DataAccess>();
+            services.AddSingleton<IQueueService, RabbitMqService>();
+            services.AddSingleton<IntegrationEventListenerService>();
+
+            services.AddHostedService(provider => provider.GetService<IntegrationEventListenerService>());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
