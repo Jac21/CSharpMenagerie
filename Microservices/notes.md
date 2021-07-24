@@ -26,5 +26,7 @@
 
 > kubectl get nodes
 
+> kubectl get pods --all-namespaces -o wide
+
 > kubectl apply -f mysql.yaml
 > kubectl apply -f mongodb.yaml
