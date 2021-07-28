@@ -1,4 +1,5 @@
 ﻿using System;
+using static MyFunctionalLibrary.F;
 
 namespace MyFunctionalLibrary
 {
@@ -10,13 +11,13 @@ namespace MyFunctionalLibrary
         public static Func<ValueTuple> ToFunc(this Action action) => () =>
         {
             action();
-            return F.Unit();
+            return Unit();
         };
 
         public static Func<T, ValueTuple> ToFunc<T>(this Action<T> action) => (t) =>
         {
             action(t);
-            return F.Unit();
+            return Unit();
         };
     }
 }
