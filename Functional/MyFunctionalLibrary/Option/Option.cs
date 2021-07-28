@@ -47,5 +47,9 @@ namespace MyFunctionalLibrary.Option
         /// <param name="some"></param>
         /// <returns></returns>
         public TR Match<TR>(Func<TR> none, Func<T, TR> some) => _isSome ? some(_value) : none();
+
+        public static Option<R> Map<T, R>(None _, Func<T, R> f) => None.Default;
+
+        public static Option<R> Map<T, R>(Some<T> some, Func<T, R> f) => new Some<R>(f(some.Value));
     }
 }

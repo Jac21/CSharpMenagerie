@@ -1,4 +1,5 @@
-﻿using Unit = System.ValueTuple;
+﻿using MyFunctionalLibrary.Option;
+using Unit = System.ValueTuple;
 
 namespace MyFunctionalLibrary
 {
@@ -11,7 +12,7 @@ namespace MyFunctionalLibrary
         /// <summary>
         /// The "None" value
         /// </summary>
-        public static Option.None None => Option.None.Default;
+        public static None None => None.Default;
 
         /// <summary>
         /// The "Some" function wraps the given value into a "Some"
@@ -19,6 +20,6 @@ namespace MyFunctionalLibrary
         /// <typeparam name="T"></typeparam>
         /// <param name="value"></param>
         /// <returns></returns>
-        public static Option.Some<T> Some<T>(T value) => new Option.Some<T>(value);
+        public static Option.Some<T> Some<T>(T value) => new Some<T>(value);
     }
 }
