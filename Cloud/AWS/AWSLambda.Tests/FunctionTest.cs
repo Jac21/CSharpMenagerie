@@ -1,35 +1,28 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-
-using Xunit;
-using Amazon.Lambda;
-using Amazon.Lambda.Core;
-using Amazon.Lambda.TestUtilities;
 using Amazon.Lambda.S3Events;
-
 using Amazon;
 using Amazon.S3;
 using Amazon.S3.Model;
 using Amazon.S3.Util;
-
-using AWSLambda;
+using NUnit.Framework;
 
 namespace AWSLambda.Tests
 {
     public class FunctionTest
     {
-        [Fact]
+        [Test]
         public async Task TestS3EventLambdaFunction()
         {
             IAmazonS3 s3Client = new AmazonS3Client(RegionEndpoint.USWest2);
 
             var bucketName = "lambda-AWSLambda-".ToLower() + DateTime.Now.Ticks;
-            var key = "text.txt";
+            const string key = "text.txt";
 
             // Create a bucket an object to setup a test data.
             await s3Client.PutBucketAsync(bucketName);
+
             try
             {
                 await s3Client.PutObjectAsync(new PutObjectRequest
@@ -48,8 +41,8 @@ namespace AWSLambda.Tests
                         {
                             S3 = new S3EventNotification.S3Entity
                             {
-                                Bucket = new S3EventNotification.S3BucketEntity {Name = bucketName },
-                                Object = new S3EventNotification.S3ObjectEntity {Key = key }
+                                Bucket = new S3EventNotification.S3BucketEntity {Name = bucketName},
+                                Object = new S3EventNotification.S3ObjectEntity {Key = key}
                             }
                         }
                     }
@@ -59,8 +52,7 @@ namespace AWSLambda.Tests
                 var function = new Function(s3Client);
                 var contentType = await function.FunctionHandler(s3Event, null);
 
-                Assert.Equal("text/plain", contentType);
-
+                Assert.AreEqual("text/plain", contentType);
             }
             finally
             {
