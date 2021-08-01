@@ -32,7 +32,7 @@ namespace AWSLambda.Tests
         {
             // arrange
             const string key = "text.txt";
-            var bucketName = await CreateTestBucket(key);
+            var bucketName = await CreateTestBucket();
 
             try
             {
@@ -73,15 +73,6 @@ namespace AWSLambda.Tests
             }
         }
 
-        private async Task<string> CreateTestBucket(string key)
-        {
-            var bucketName = "lambda-AWSLambda-".ToLower() + DateTime.Now.Ticks;
-
-            // Create a bucket an object to setup a test data.
-            await _s3Client.PutBucketAsync(bucketName);
-            return bucketName;
-        }
-
         [Test]
         public async Task S3Functions_ListBucketsAsync_Success_Test()
         {
@@ -89,7 +80,7 @@ namespace AWSLambda.Tests
             CancellationToken cancellationToken = default;
 
             const string key = "text.txt";
-            var bucketName = await CreateTestBucket(key);
+            var bucketName = await CreateTestBucket();
 
             try
             {
@@ -104,7 +95,8 @@ namespace AWSLambda.Tests
                 var response = await _s3Functions.ListBucketsAsync(cancellationToken);
 
                 // assert
-                Assert.IsTrue(response.Buckets.Any());
+                Assert.IsTrue(response.Buckets.Any(x =>
+                    string.Equals(bucketName, x.BucketName, StringComparison.OrdinalIgnoreCase)));
             }
             finally
             {
@@ -117,6 +109,15 @@ namespace AWSLambda.Tests
         public void Cleanup()
         {
             _s3Client.Dispose();
+        }
+
+        private async Task<string> CreateTestBucket()
+        {
+            var bucketName = "lambda-AWSLambda-".ToLower() + DateTime.Now.Ticks;
+
+            // Create a bucket an object to setup a test data.
+            await _s3Client.PutBucketAsync(bucketName);
+            return bucketName;
         }
     }
 }

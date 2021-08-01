@@ -3,6 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Amazon.Lambda.Core;
 using Amazon.Lambda.S3Events;
+using Amazon.Runtime;
 using Amazon.S3;
 using Amazon.S3.Model;
 
@@ -22,7 +23,13 @@ namespace AWSLambda
         /// </summary>
         public S3Functions()
         {
-            S3Client = new AmazonS3Client();
+            S3Client = new AmazonS3Client(
+                new AmazonS3Config
+                {
+                    Timeout = TimeSpan.FromSeconds(10),
+                    RetryMode = RequestRetryMode.Standard,
+                    MaxErrorRetry = 3
+                });
         }
 
         /// <summary>
