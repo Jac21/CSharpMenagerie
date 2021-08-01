@@ -1,15 +1,17 @@
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 using Amazon.Lambda.Core;
 using Amazon.Lambda.S3Events;
 using Amazon.S3;
+using Amazon.S3.Model;
 
 // Assembly attribute to enable the Lambda function's JSON input to be converted into a .NET class.
 [assembly: LambdaSerializer(typeof(Amazon.Lambda.Serialization.SystemTextJson.DefaultLambdaJsonSerializer))]
 
 namespace AWSLambda
 {
-    public class Function
+    public class S3Functions
     {
         private IAmazonS3 S3Client { get; }
 
@@ -18,7 +20,7 @@ namespace AWSLambda
         /// the AWS credentials will come from the IAM role associated with the function and the AWS region will be set to the
         /// region the Lambda function is executed in.
         /// </summary>
-        public Function()
+        public S3Functions()
         {
             S3Client = new AmazonS3Client();
         }
@@ -27,7 +29,7 @@ namespace AWSLambda
         /// Constructs an instance with a preconfigured S3 client. This can be used for testing the outside of the Lambda environment.
         /// </summary>
         /// <param name="s3Client"></param>
-        public Function(IAmazonS3 s3Client)
+        public S3Functions(IAmazonS3 s3Client)
         {
             S3Client = s3Client ?? throw new ArgumentNullException(nameof(s3Client));
         }
@@ -64,6 +66,11 @@ namespace AWSLambda
 
                 throw;
             }
+        }
+
+        public async Task<ListBucketsResponse> ListBucketsAsync(CancellationToken cancellationToken = default)
+        {
+            return await S3Client.ListBucketsAsync(cancellationToken);
         }
     }
 }
