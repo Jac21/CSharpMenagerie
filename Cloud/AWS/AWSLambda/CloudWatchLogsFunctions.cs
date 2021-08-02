@@ -7,35 +7,35 @@ namespace AWSLambda
 {
     public class CloudWatchLogsFunctions
     {
-        private IAmazonCloudWatchLogs AmazonCloudWatchLogsClient { get; }
+        private readonly IAmazonCloudWatchLogs _amazonCloudWatchLogsClient;
 
-        public ILogger Logger { get; }
+        private readonly ILogger _logger;
 
         public CloudWatchLogsFunctions(IAmazonCloudWatchLogs amazonCloudWatchLogsClient, ILogger logger)
         {
-            AmazonCloudWatchLogsClient = amazonCloudWatchLogsClient;
+            _amazonCloudWatchLogsClient = amazonCloudWatchLogsClient;
 
-            Logger = logger;
+            _logger = logger;
         }
 
         public async Task DisplayLogGroupsWithPaginators()
         {
             var paginatorForResponses =
-                AmazonCloudWatchLogsClient.Paginators.DescribeLogGroups(new DescribeLogGroupsRequest());
+                _amazonCloudWatchLogsClient.Paginators.DescribeLogGroups(new DescribeLogGroupsRequest());
 
             await foreach (var response in paginatorForResponses.Responses)
             {
-                Logger.LogInformation($"Content length: {response.ContentLength}");
+                _logger.LogInformation($"Content length: {response.ContentLength}");
 
-                Logger.LogInformation($"HTTP result: {response.HttpStatusCode}");
+                _logger.LogInformation($"HTTP result: {response.HttpStatusCode}");
 
-                Logger.LogInformation($"Metadata: {response.ResponseMetadata}");
+                _logger.LogInformation($"Metadata: {response.ResponseMetadata}");
 
-                Logger.LogInformation("Log groups:");
+                _logger.LogInformation("Log groups:");
 
                 foreach (var logGroup in response.LogGroups)
                 {
-                    Logger.LogInformation($"\t{logGroup.LogGroupName}");
+                    _logger.LogInformation($"\t{logGroup.LogGroupName}");
                 }
             }
         }

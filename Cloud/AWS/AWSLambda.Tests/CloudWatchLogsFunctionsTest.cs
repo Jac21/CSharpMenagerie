@@ -20,7 +20,12 @@ namespace AWSLambda.Tests
         public void Init()
         {
             var serviceProvider = new ServiceCollection()
-                .AddLogging(builder => { builder.AddConsole(); })
+                .AddLogging(builder =>
+                {
+                    builder.AddConsole();
+                    builder.AddLambdaLogger();
+                    builder.SetMinimumLevel(LogLevel.Debug);
+                })
                 .BuildServiceProvider();
 
             _factory = serviceProvider.GetService<ILoggerFactory>();

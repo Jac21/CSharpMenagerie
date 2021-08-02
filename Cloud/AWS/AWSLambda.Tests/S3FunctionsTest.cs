@@ -8,6 +8,8 @@ using Amazon;
 using Amazon.S3;
 using Amazon.S3.Model;
 using Amazon.S3.Util;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using NUnit.Framework;
 
 namespace AWSLambda.Tests
@@ -17,14 +19,29 @@ namespace AWSLambda.Tests
     {
         private IAmazonS3 _s3Client;
 
+        private ILoggerFactory _factory;
+
         private S3Functions _s3Functions;
 
         [OneTimeSetUp]
         public void Init()
         {
+            var serviceProvider = new ServiceCollection()
+                .AddLogging(builder =>
+                {
+                    builder.AddConsole();
+                    builder.AddLambdaLogger();
+                    builder.SetMinimumLevel(LogLevel.Debug);
+                })
+                .BuildServiceProvider();
+
+            _factory = serviceProvider.GetService<ILoggerFactory>();
+
+            var logger = _factory.CreateLogger<S3FunctionsTest>();
+
             _s3Client = new AmazonS3Client(RegionEndpoint.USWest2);
 
-            _s3Functions = new S3Functions(_s3Client);
+            _s3Functions = new S3Functions(_s3Client, logger);
         }
 
         [Test]
@@ -62,7 +79,7 @@ namespace AWSLambda.Tests
                 // act
 
                 // Invoke the lambda function and confirm the content type was returned.
-                var contentType = await _s3Functions.FunctionHandler(s3Event, null);
+                var contentType = await _s3Functions.FunctionHandler(s3Event);
 
                 Assert.AreEqual("text/plain", contentType);
             }
@@ -109,6 +126,8 @@ namespace AWSLambda.Tests
         public void Cleanup()
         {
             _s3Client.Dispose();
+
+            _factory.Dispose();
         }
 
         private async Task<string> CreateTestBucket()

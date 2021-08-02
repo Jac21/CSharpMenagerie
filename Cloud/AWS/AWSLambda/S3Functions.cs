@@ -6,6 +6,7 @@ using Amazon.Lambda.S3Events;
 using Amazon.Runtime;
 using Amazon.S3;
 using Amazon.S3.Model;
+using Microsoft.Extensions.Logging;
 
 // Assembly attribute to enable the Lambda function's JSON input to be converted into a .NET class.
 [assembly: LambdaSerializer(typeof(Amazon.Lambda.Serialization.SystemTextJson.DefaultLambdaJsonSerializer))]
@@ -14,16 +15,20 @@ namespace AWSLambda
 {
     public class S3Functions
     {
-        private IAmazonS3 S3Client { get; }
+        private readonly IAmazonS3 _s3Client;
+
+        private readonly ILogger _logger;
 
         /// <summary>
         /// Default constructor. This constructor is used by Lambda to construct the instance. When invoked in a Lambda environment
         /// the AWS credentials will come from the IAM role associated with the function and the AWS region will be set to the
         /// region the Lambda function is executed in.
         /// </summary>
-        public S3Functions()
+        public S3Functions(ILogger logger)
         {
-            S3Client = new AmazonS3Client(
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
+
+            _s3Client = new AmazonS3Client(
                 new AmazonS3Config
                 {
                     Timeout = TimeSpan.FromSeconds(10),
@@ -36,9 +41,11 @@ namespace AWSLambda
         /// Constructs an instance with a preconfigured S3 client. This can be used for testing the outside of the Lambda environment.
         /// </summary>
         /// <param name="s3Client"></param>
-        public S3Functions(IAmazonS3 s3Client)
+        /// <param name="logger"></param>
+        public S3Functions(IAmazonS3 s3Client, ILogger logger)
         {
-            S3Client = s3Client ?? throw new ArgumentNullException(nameof(s3Client));
+            _s3Client = s3Client ?? throw new ArgumentNullException(nameof(s3Client));
+            _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
         /// <summary>
@@ -46,9 +53,8 @@ namespace AWSLambda
         /// to respond to S3 notifications.
         /// </summary>
         /// <param name="evnt"></param>
-        /// <param name="context"></param>
         /// <returns></returns>
-        public async Task<string> FunctionHandler(S3Event evnt, ILambdaContext context)
+        public async Task<string> FunctionHandler(S3Event evnt)
         {
             var s3Event = evnt.Records?[0].S3;
 
@@ -59,17 +65,17 @@ namespace AWSLambda
 
             try
             {
-                var response = await S3Client.GetObjectMetadataAsync(s3Event.Bucket.Name, s3Event.Object.Key);
+                var response = await _s3Client.GetObjectMetadataAsync(s3Event.Bucket.Name, s3Event.Object.Key);
 
                 return response.Headers.ContentType;
             }
             catch (Exception e)
             {
-                context.Logger.LogLine(
+                _logger.LogCritical(
                     $"Error getting object {s3Event.Object.Key} from bucket {s3Event.Bucket.Name}. Make sure they exist and your bucket is in the same region as this function.");
 
-                context.Logger.LogLine(e.Message);
-                context.Logger.LogLine(e.StackTrace);
+                _logger.LogCritical(e.Message);
+                _logger.LogCritical(e.StackTrace);
 
                 throw;
             }
@@ -77,7 +83,7 @@ namespace AWSLambda
 
         public async Task<ListBucketsResponse> ListBucketsAsync(CancellationToken cancellationToken = default)
         {
-            return await S3Client.ListBucketsAsync(cancellationToken);
+            return await _s3Client.ListBucketsAsync(cancellationToken);
         }
     }
 }
