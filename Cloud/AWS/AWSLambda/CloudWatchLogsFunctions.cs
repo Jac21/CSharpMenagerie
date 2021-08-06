@@ -18,7 +18,7 @@ namespace AWSLambda
             _logger = logger;
         }
 
-        public async Task DisplayLogGroupsWithPaginators()
+        public async ValueTask DisplayLogGroupsWithPaginators()
         {
             var paginatorForResponses =
                 _amazonCloudWatchLogsClient.Paginators.DescribeLogGroups(new DescribeLogGroupsRequest());

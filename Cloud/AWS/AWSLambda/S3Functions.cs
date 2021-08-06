@@ -54,7 +54,7 @@ namespace AWSLambda
         /// </summary>
         /// <param name="evnt"></param>
         /// <returns></returns>
-        public async Task<string> FunctionHandler(S3Event evnt)
+        public async ValueTask<string> FunctionHandler(S3Event evnt)
         {
             var s3Event = evnt.Records?[0].S3;
 
@@ -81,7 +81,7 @@ namespace AWSLambda
             }
         }
 
-        public async Task<ListBucketsResponse> ListBucketsAsync(CancellationToken cancellationToken = default)
+        public async ValueTask<ListBucketsResponse> ListBucketsAsync(CancellationToken cancellationToken = default)
         {
             return await _s3Client.ListBucketsAsync(cancellationToken);
         }
