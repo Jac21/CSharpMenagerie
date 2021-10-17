@@ -20,6 +20,13 @@
 
 > docker push jac21/docker101tutorial
 
+-- "In the default daemon configuration on Windows, the docker client must be run elevated to connect"
+
+Open cmd as administrator
+
+> C:\Program Files\Docker\Docker\DockerCli.exe" -SwitchDaemon
+
+
 -- kube
 
 > minikube start
