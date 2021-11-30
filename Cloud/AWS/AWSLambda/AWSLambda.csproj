@@ -11,7 +11,9 @@
     <PackageReference Include="Amazon.Lambda.Logging.AspNetCore" Version="3.1.0" />
     <PackageReference Include="Amazon.Lambda.Serialization.SystemTextJson" Version="2.1.0" />
     <PackageReference Include="Amazon.Lambda.S3Events" Version="2.0.1" />
+    <PackageReference Include="AWSSDK.Cloud9" Version="3.7.2.51" />
     <PackageReference Include="AWSSDK.CloudWatchLogs" Version="3.7.1.21" />
+    <PackageReference Include="AWSSDK.DynamoDBv2" Version="3.7.1" />
     <PackageReference Include="AWSSDK.S3" Version="3.7.1.19" />
     <PackageReference Include="AWSSDK.SQS" Version="3.7.0.48" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="5.0.0" />
