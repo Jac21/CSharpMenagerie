@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 namespace HackerRank
@@ -7,25 +6,25 @@ namespace HackerRank
     // Definition for a Node.
     public class Node
     {
-        public int val;
-        public IList<Node> neighbors;
+        public int Val;
+        public readonly IList<Node> Neighbors;
 
         public Node()
         {
-            val = 0;
-            neighbors = new List<Node>();
+            Val = 0;
+            Neighbors = new List<Node>();
         }
 
-        public Node(int _val)
+        public Node(int val)
         {
-            val = _val;
-            neighbors = new List<Node>();
+            Val = val;
+            Neighbors = new List<Node>();
         }
 
-        public Node(int _val, List<Node> _neighbors)
+        public Node(int val, IList<Node> _neighbors)
         {
-            val = _val;
-            neighbors = _neighbors;
+            Val = val;
+            Neighbors = _neighbors;
         }
     }
 
@@ -42,24 +41,24 @@ namespace HackerRank
 
         public static Node CloneDfs(Node node, Dictionary<int, Node> map)
         {
-            if (map.ContainsKey(node.val)) return null;
+            if (map.ContainsKey(node.Val)) return null;
 
             var nodeToReturn = new Node
             {
-                val = node.val
+                Val = node.Val
             };
 
-            map[node.val] = nodeToReturn;
+            map[node.Val] = nodeToReturn;
 
-            foreach (var neighbor in node.neighbors)
+            foreach (var neighbor in node.Neighbors)
             {
-                if (map.ContainsKey(neighbor.val))
+                if (map.ContainsKey(neighbor.Val))
                 {
-                    nodeToReturn.neighbors.Add(map[neighbor.val]);
+                    nodeToReturn.Neighbors.Add(map[neighbor.Val]);
                 }
                 else
                 {
-                    nodeToReturn.neighbors.Add(CloneDfs(neighbor, map));
+                    nodeToReturn.Neighbors.Add(CloneDfs(neighbor, map));
                 }
             }
 
@@ -76,26 +75,26 @@ namespace HackerRank
 
             queue.Enqueue(node);
 
-            var startNode = new Node(node.val);
-            map.Add(startNode.val, startNode);
+            var startNode = new Node(node.Val);
+            map.Add(startNode.Val, startNode);
 
             while (queue.Any())
             {
                 var item = queue.Dequeue();
 
-                foreach (var neighbor in item.neighbors)
+                foreach (var neighbor in item.Neighbors)
                 {
-                    if (map.ContainsKey(neighbor.val))
+                    if (map.ContainsKey(neighbor.Val))
                     {
-                        map[neighbor.val].neighbors.Add(map[neighbor.val]);
+                        map[neighbor.Val].Neighbors.Add(map[neighbor.Val]);
                     }
                     else
                     {
-                        var newNode = new Node(neighbor.val);
+                        var newNode = new Node(neighbor.Val);
 
-                        map.Add(neighbor.val, newNode);
+                        map.Add(neighbor.Val, newNode);
 
-                        map[item.val].neighbors.Add(newNode);
+                        map[item.Val].Neighbors.Add(newNode);
 
                         queue.Enqueue(neighbor);
                     }
@@ -106,4 +105,3 @@ namespace HackerRank
         }
     }
 }
-

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 namespace HackerRank
@@ -28,12 +27,11 @@ namespace HackerRank
                 citizensToTrusteesMapping[pair.Skip(1).FirstOrDefault()].Add(pair.FirstOrDefault());
             }
 
-            var judge = citizensToTrusteesMapping.Where(kvp => kvp.Value.Count == n - 1 && !citizens.Contains(kvp.Key))
-                .FirstOrDefault()
+            var judge = citizensToTrusteesMapping
+                .FirstOrDefault(kvp => kvp.Value.Count == n - 1 && !citizens.Contains(kvp.Key))
                 .Key;
 
             return judge == 0 ? -1 : judge;
         }
     }
 }
-
