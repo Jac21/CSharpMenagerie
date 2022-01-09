@@ -2,7 +2,7 @@
 
 namespace HackerRank.Algorithms
 {
-    public class ExtraLongFactorials
+    public static class ExtraLongFactorials
     {
         public static BigInteger ComputeExtraLongFactorials(BigInteger n)
         {
