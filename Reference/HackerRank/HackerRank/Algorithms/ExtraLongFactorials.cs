@@ -1,6 +1,6 @@
 ﻿using System.Numerics;
 
-namespace HackerRank
+namespace HackerRank.Algorithms
 {
     public class ExtraLongFactorials
     {

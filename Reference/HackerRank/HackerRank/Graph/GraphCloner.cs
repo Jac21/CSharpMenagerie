@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace HackerRank
+namespace HackerRank.Graph
 {
     // Definition for a Node.
     public class Node

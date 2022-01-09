@@ -1,6 +1,6 @@
 using System.Linq;
 
-namespace HackerRank
+namespace HackerRank.Array
 {
     public static class CarPooler
     {

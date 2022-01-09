@@ -1,6 +1,7 @@
+using HackerRank.DynamicProgramming;
 using NUnit.Framework;
 
-namespace HackerRank.Unit.Tests;
+namespace HackerRank.Unit.Tests.DynamicProgramming;
 
 public class LongestValidParenthesesTests
 {

@@ -1,6 +1,7 @@
-﻿using NUnit.Framework;
+﻿using HackerRank.Graph;
+using NUnit.Framework;
 
-namespace HackerRank.Unit.Tests;
+namespace HackerRank.Unit.Tests.Graph;
 
 public class TownJudgeFinderTests
 {

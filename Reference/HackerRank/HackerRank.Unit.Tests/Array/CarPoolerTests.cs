@@ -1,6 +1,7 @@
+using HackerRank.Array;
 using NUnit.Framework;
 
-namespace HackerRank.Unit.Tests;
+namespace HackerRank.Unit.Tests.Array;
 
 public class CarPoolerTests
 {
