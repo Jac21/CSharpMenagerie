@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 25.0.1700.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HackerRank", "HackerRank\HackerRank.csproj", "{7F0E02BD-75C3-406F-8B39-566A53DEE4CF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Athenaeum", "Athenaeum\Athenaeum.csproj", "{7F0E02BD-75C3-406F-8B39-566A53DEE4CF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HackerRank.Console", "HackerRank.Console\HackerRank.Console.csproj", "{E0EC43C4-60AF-427A-9C7B-C2CCD9D5CF84}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Athenaeum.Console", "Athenaeum.Console\Athenaeum.Console.csproj", "{E0EC43C4-60AF-427A-9C7B-C2CCD9D5CF84}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HackerRank.Unit.Tests", "HackerRank.Unit.Tests\HackerRank.Unit.Tests.csproj", "{59B6BA29-7732-4456-9414-9EDB78A2ACF3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Athenaeum.Unit.Tests", "Athenaeum.Unit.Tests\Athenaeum.Unit.Tests.csproj", "{59B6BA29-7732-4456-9414-9EDB78A2ACF3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
