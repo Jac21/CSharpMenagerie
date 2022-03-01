@@ -1,6 +1,6 @@
 using System.Linq;
 
-namespace Athenaeum.Array
+namespace Athenaeum.Arrays
 {
     public static class CarPooler
     {

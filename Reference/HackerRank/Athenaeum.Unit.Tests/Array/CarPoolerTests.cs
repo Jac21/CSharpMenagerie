@@ -1,4 +1,4 @@
-using Athenaeum.Array;
+using Athenaeum.Arrays;
 using NUnit.Framework;
 
 namespace HackerRank.Unit.Tests.Array;
