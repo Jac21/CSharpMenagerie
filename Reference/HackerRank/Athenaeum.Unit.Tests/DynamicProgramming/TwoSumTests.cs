@@ -63,4 +63,19 @@ public class TwoSumTests
             0, 1
         }, baseCase);
     }
+
+    [Test]
+    public void TwoSumCount_SimpleCase_Success()
+    {
+        // arrange
+
+        // act
+        var simpleCase = TwoSum.FindTwoSumCount(new[]
+        {
+            1, 2, 3, 4, 3
+        }, 6);
+
+        // assert
+        Assert.AreEqual(2, simpleCase);
+    }
 }

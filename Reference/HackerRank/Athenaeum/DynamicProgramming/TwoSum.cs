@@ -22,7 +22,7 @@ namespace Athenaeum.DynamicProgramming
                 {
                     return new[] {index, i};
                 }
-                
+
                 if (!resultsDictionary.ContainsKey(nums[i]))
                 {
                     resultsDictionary.Add(nums[i], i);
@@ -30,6 +30,29 @@ namespace Athenaeum.DynamicProgramming
             }
 
             return new int[] { };
+        }
+
+        public static int FindTwoSumCount(int[] arr, int k)
+        {
+            if (!arr.Any()) return 1;
+
+            var count = 0;
+            var resultsDictionary = new Dictionary<int, int>();
+
+            for (var i = 0; i < arr.Length; i++)
+            {
+                if (resultsDictionary.TryGetValue(k - arr[i], out var index))
+                {
+                    count += 1;
+                }
+
+                if (!resultsDictionary.ContainsKey(arr[i]))
+                {
+                    resultsDictionary.Add(arr[i], i);
+                }
+            }
+
+            return count;
         }
     }
 }
