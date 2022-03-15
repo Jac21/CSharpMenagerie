@@ -19,8 +19,4 @@
   <ItemGroup>
     <ProjectReference Include="..\Athenaeum\Athenaeum.csproj" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Arrays" />
-  </ItemGroup>
 </Project>
