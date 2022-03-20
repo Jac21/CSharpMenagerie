@@ -1,24 +1,26 @@
 using Athenaeum.Algorithms;
 using NUnit.Framework;
 
-namespace HackerRank.Unit.Tests.Algorithms;
-
-public class ExtraLongFactorialsTests
+namespace HackerRank.Unit.Tests.Algorithms
 {
-    [SetUp]
-    public void Setup()
+
+    public class ExtraLongFactorialsTests
     {
-    }
+        [SetUp]
+        public void Setup()
+        {
+        }
 
-    [Test]
-    public void ExtraLongFactorials_SimpleCase_Success()
-    {
-        // arrange
+        [Test]
+        public void ExtraLongFactorials_SimpleCase_Success()
+        {
+            // arrange
 
-        // act
-        var simpleCase = ExtraLongFactorials.ComputeExtraLongFactorials(25);
+            // act
+            var simpleCase = ExtraLongFactorials.ComputeExtraLongFactorials(25);
 
-        // assert
-        Assert.IsTrue(simpleCase > 0);
+            // assert
+            Assert.IsTrue(simpleCase > 0);
+        }
     }
 }

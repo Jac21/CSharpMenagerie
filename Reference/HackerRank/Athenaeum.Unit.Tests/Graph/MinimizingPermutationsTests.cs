@@ -1,29 +1,31 @@
 using Athenaeum.Graph;
 using NUnit.Framework;
 
-namespace HackerRank.Unit.Tests.Graph;
-
-[Ignore("TODO")]
-public class MinimizingPermutationsTests
+namespace HackerRank.Unit.Tests.Graph
 {
-    [SetUp]
-    public void Setup()
-    {
-    }
 
-    [Test]
-    public void MinimizingPermutations_SimpleCase_Success()
+    [Ignore("TODO")]
+    public class MinimizingPermutationsTests
     {
-        // arrange
-        var input = new[]
+        [SetUp]
+        public void Setup()
         {
+        }
+
+        [Test]
+        public void MinimizingPermutations_SimpleCase_Success()
+        {
+            // arrange
+            var input = new[]
+            {
             3, 1, 2
         };
 
-        // act
-        var simpleCase = MinimizingPermutations.MinOperations(input);
+            // act
+            var simpleCase = MinimizingPermutations.MinOperations(input);
 
-        // assert
-        Assert.AreEqual(2, simpleCase);
+            // assert
+            Assert.AreEqual(2, simpleCase);
+        }
     }
 }

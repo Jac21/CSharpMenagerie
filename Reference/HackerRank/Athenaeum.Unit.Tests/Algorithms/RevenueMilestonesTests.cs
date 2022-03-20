@@ -1,33 +1,35 @@
 using Athenaeum.Algorithms;
 using NUnit.Framework;
 
-namespace HackerRank.Unit.Tests.Algorithms;
-
-public class RevenueMilestonesTests
+namespace HackerRank.Unit.Tests.Algorithms
 {
-    [SetUp]
-    public void Setup()
-    {
-    }
 
-    [Test]
-    public void RevenueMilestones_SimpleCase_Success()
+    public class RevenueMilestonesTests
     {
-        // arrange
-        var revenues = new[]
+        [SetUp]
+        public void Setup()
         {
+        }
+
+        [Test]
+        public void RevenueMilestones_SimpleCase_Success()
+        {
+            // arrange
+            var revenues = new[]
+            {
             10, 20, 30, 40, 50, 60, 70, 80, 90, 100
         };
 
-        var milestones = new[]
-        {
+            var milestones = new[]
+            {
             100, 200, 500
         };
 
-        // act
-        var result = RevenueMilestones.GetMilestoneDaysIterative(revenues, milestones);
+            // act
+            var result = RevenueMilestones.GetMilestoneDaysIterative(revenues, milestones);
 
-        // assert
-        Assert.AreEqual(new[] {4, 6, 10}, result);
+            // assert
+            Assert.AreEqual(new[] { 4, 6, 10 }, result);
+        }
     }
 }

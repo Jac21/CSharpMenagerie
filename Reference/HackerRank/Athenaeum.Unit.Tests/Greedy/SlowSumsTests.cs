@@ -1,28 +1,30 @@
 using Athenaeum.Greedy;
 using NUnit.Framework;
 
-namespace HackerRank.Unit.Tests.Greedy;
-
-public class SlowSumsTests
+namespace HackerRank.Unit.Tests.Greedy
 {
-    [SetUp]
-    public void Setup()
-    {
-    }
 
-    [Test]
-    public void SlowSums_SimpleCase_Success()
+    public class SlowSumsTests
     {
-        // arrange
-        var input = new[]
+        [SetUp]
+        public void Setup()
         {
+        }
+
+        [Test]
+        public void SlowSums_SimpleCase_Success()
+        {
+            // arrange
+            var input = new[]
+            {
             4, 2, 1, 3
         };
 
-        // act
-        var simpleCase = SlowSums.GetTotalTime(input);
+            // act
+            var simpleCase = SlowSums.GetTotalTime(input);
 
-        // assert
-        Assert.AreEqual(26, simpleCase);
+            // assert
+            Assert.AreEqual(26, simpleCase);
+        }
     }
 }

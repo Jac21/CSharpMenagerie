@@ -1,46 +1,48 @@
 using Athenaeum.Heaps;
 using NUnit.Framework;
 
-namespace HackerRank.Unit.Tests.Heaps;
-
-public class MagicalCandyBagsTests
+namespace HackerRank.Unit.Tests.Heaps
 {
-    [SetUp]
-    public void Setup()
-    {
-    }
 
-    [Test]
-    public void MagicalCandyBags_SimpleCase_Success()
+    public class MagicalCandyBagsTests
     {
-        // arrange
-        var input = new[]
+        [SetUp]
+        public void Setup()
         {
+        }
+
+        [Test]
+        public void MagicalCandyBags_SimpleCase_Success()
+        {
+            // arrange
+            var input = new[]
+            {
             2, 1, 7, 4, 2
         };
 
-        // act
-        var result =
-            MagicalCandyBags.MaxCandiesIterative(input, 3);
+            // act
+            var result =
+                MagicalCandyBags.MaxCandiesIterative(input, 3);
 
-        // assert
-        Assert.AreEqual(14, result);
-    }
+            // assert
+            Assert.AreEqual(14, result);
+        }
 
-    [Test]
-    public void MagicalCandyBags_SimpleCase_Heap_Success()
-    {
-        // arrange
-        var input = new[]
+        [Test]
+        public void MagicalCandyBags_SimpleCase_Heap_Success()
         {
+            // arrange
+            var input = new[]
+            {
             2, 1, 7, 4, 2
         };
 
-        // act
-        var result =
-            MagicalCandyBags.MaxCandiesHeap(input, 3);
+            // act
+            var result =
+                MagicalCandyBags.MaxCandiesHeap(input, 3);
 
-        // assert
-        Assert.AreEqual(14, result);
+            // assert
+            Assert.AreEqual(14, result);
+        }
     }
 }

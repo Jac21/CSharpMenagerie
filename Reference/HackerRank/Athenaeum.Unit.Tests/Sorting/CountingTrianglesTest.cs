@@ -1,21 +1,22 @@
 using Athenaeum.Sorting;
 using NUnit.Framework;
 
-namespace HackerRank.Unit.Tests.Sorting;
-
-public class CountingTrianglesTest
+namespace HackerRank.Unit.Tests.Sorting
 {
-    [SetUp]
-    public void Setup()
-    {
-    }
 
-    [Test]
-    public void CountingTriangles_SimpleCase_Success()
+    public class CountingTrianglesTest
     {
-        // arrange
-        var input = new[]
+        [SetUp]
+        public void Setup()
         {
+        }
+
+        [Test]
+        public void CountingTriangles_SimpleCase_Success()
+        {
+            // arrange
+            var input = new[]
+            {
             new[]
             {
                 2, 2, 3
@@ -30,19 +31,19 @@ public class CountingTrianglesTest
             }
         };
 
-        // act
-        var simpleCase = CountingTriangles.CountDistinctTriangles(input);
+            // act
+            var simpleCase = CountingTriangles.CountDistinctTriangles(input);
 
-        // assert
-        Assert.AreEqual(2, simpleCase);
-    }
+            // assert
+            Assert.AreEqual(2, simpleCase);
+        }
 
-    [Test]
-    public void CountingTriangles_SimpleCaseTwo_Success()
-    {
-        // arrange
-        var input = new[]
+        [Test]
+        public void CountingTriangles_SimpleCaseTwo_Success()
         {
+            // arrange
+            var input = new[]
+            {
             new[]
             {
                 8, 4, 6
@@ -57,19 +58,19 @@ public class CountingTrianglesTest
             }
         };
 
-        // act
-        var simpleCase = CountingTriangles.CountDistinctTriangles(input);
+            // act
+            var simpleCase = CountingTriangles.CountDistinctTriangles(input);
 
-        // assert
-        Assert.AreEqual(3, simpleCase);
-    }
+            // assert
+            Assert.AreEqual(3, simpleCase);
+        }
 
-    [Test]
-    public void CountingTriangles_SimpleCaseThree_Success()
-    {
-        // arrange
-        var input = new[]
+        [Test]
+        public void CountingTriangles_SimpleCaseThree_Success()
         {
+            // arrange
+            var input = new[]
+            {
             new[]
             {
                 5, 8, 9
@@ -96,10 +97,11 @@ public class CountingTrianglesTest
             }
         };
 
-        // act
-        var simpleCase = CountingTriangles.CountDistinctTriangles(input);
+            // act
+            var simpleCase = CountingTriangles.CountDistinctTriangles(input);
 
-        // assert
-        Assert.AreEqual(1, simpleCase);
+            // assert
+            Assert.AreEqual(1, simpleCase);
+        }
     }
 }

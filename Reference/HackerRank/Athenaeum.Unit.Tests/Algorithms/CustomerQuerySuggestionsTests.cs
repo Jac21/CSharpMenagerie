@@ -3,29 +3,31 @@ using System.Linq;
 using Athenaeum.Algorithms;
 using NUnit.Framework;
 
-namespace HackerRank.Unit.Tests.Algorithms;
-
-public class CustomerQuerySuggestionsTests
+namespace HackerRank.Unit.Tests.Algorithms
 {
-    [SetUp]
-    public void Setup()
-    {
-    }
 
-    [Test]
-    public void CustomerQuerySuggestions_SimpleCase_Success()
+    public class CustomerQuerySuggestionsTests
     {
-        // arrange
-        var repository = new List<string>
+        [SetUp]
+        public void Setup()
+        {
+        }
+
+        [Test]
+        public void CustomerQuerySuggestions_SimpleCase_Success()
+        {
+            // arrange
+            var repository = new List<string>
         {
             "mobile", "mouse", "moneypot", "monitor", "mousepad"
         };
 
-        // act
-        var results =
-            CustomerQuerySuggestions.searchSuggestions(repository, "mouse");
+            // act
+            var results =
+                CustomerQuerySuggestions.searchSuggestions(repository, "mouse");
 
-        // assert
-        Assert.IsTrue(results.Any());
+            // assert
+            Assert.IsTrue(results.Any());
+        }
     }
 }

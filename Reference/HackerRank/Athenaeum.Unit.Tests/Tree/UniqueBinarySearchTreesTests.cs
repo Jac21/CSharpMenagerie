@@ -1,39 +1,41 @@
 using Athenaeum.Tree;
 using NUnit.Framework;
 
-namespace HackerRank.Unit.Tests.Tree;
-
-public class UniqueBinarySearchTreesTests
+namespace HackerRank.Unit.Tests.Tree
 {
-    private UniqueBinarySearchTrees _uniqueBinarySearchTrees;
-    
-    [SetUp]
-    public void Setup()
+
+    public class UniqueBinarySearchTreesTests
     {
-        _uniqueBinarySearchTrees = new UniqueBinarySearchTrees();
-    }
+        private UniqueBinarySearchTrees _uniqueBinarySearchTrees;
 
-    [Test]
-    public void UniqueBinarySearchTrees_SimpleCase_Success()
-    {
-        // arrange
+        [SetUp]
+        public void Setup()
+        {
+            _uniqueBinarySearchTrees = new UniqueBinarySearchTrees();
+        }
 
-        // act
-        var simpleCase = _uniqueBinarySearchTrees.NumTrees(3);
+        [Test]
+        public void UniqueBinarySearchTrees_SimpleCase_Success()
+        {
+            // arrange
 
-        // assert
-        Assert.AreEqual(5, simpleCase);
-    }
+            // act
+            var simpleCase = _uniqueBinarySearchTrees.NumTrees(3);
 
-    [Test]
-    public void UniqueBinarySearchTrees_SimpleCaseTwo_Success()
-    {
-        // arrange
+            // assert
+            Assert.AreEqual(5, simpleCase);
+        }
 
-        // act
-        var simpleCaseTwo = _uniqueBinarySearchTrees.NumTrees(1);
+        [Test]
+        public void UniqueBinarySearchTrees_SimpleCaseTwo_Success()
+        {
+            // arrange
 
-        // assert
-        Assert.AreEqual(1, simpleCaseTwo);
+            // act
+            var simpleCaseTwo = _uniqueBinarySearchTrees.NumTrees(1);
+
+            // assert
+            Assert.AreEqual(1, simpleCaseTwo);
+        }
     }
 }
