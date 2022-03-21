@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using Athenaeum.Tree;
+﻿using Athenaeum.Tree;
 using NUnit.Framework;
 
 namespace HackerRank.Unit.Tests.Tree
 {
+
     public class NodesInASubtreeTests
     {
         [SetUp]
@@ -12,23 +12,18 @@ namespace HackerRank.Unit.Tests.Tree
         }
 
         [Test]
-        public void NodesInASubtree_SimpleCase_Success()
+        public void NumberOfVisibleNodes_SimpleCase_Success()
         {
             // arrange
-            TreeNodeWrapper treeNodeWrapper = new(1);
-
-            List<Query> queries = new()
-            {
-                new Query(1, 'a')
-            };
-
-            const string s = "aba";
+            TreeNode root = new TreeNode(8,
+                new TreeNode(3, new TreeNode(1), new TreeNode(6, new TreeNode(4), new TreeNode(7))),
+                new TreeNode(10, null, new TreeNode(14, new TreeNode(13))));
 
             // act
-            var simpleCase = NodesInASubtree.CountOfNodes(treeNodeWrapper, queries, s);
+            var simpleCase = NumberOfVisibleNodes.VisibleNodes(root);
 
             // assert
-            Assert.AreEqual(new int[] { 2 }, simpleCase);
+            Assert.AreEqual(4, simpleCase);
         }
     }
 }
