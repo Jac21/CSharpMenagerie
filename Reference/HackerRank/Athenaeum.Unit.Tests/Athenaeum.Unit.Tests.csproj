@@ -21,8 +21,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Remove="Queues\" />
+    <None Remove="LinkedLists\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Queues\" />
+    <Folder Include="LinkedLists\" />
   </ItemGroup>
 </Project>
