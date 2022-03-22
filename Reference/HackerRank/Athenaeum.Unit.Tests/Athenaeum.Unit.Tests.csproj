@@ -19,4 +19,10 @@
   <ItemGroup>
     <ProjectReference Include="..\Athenaeum\Athenaeum.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <None Remove="Queues\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Queues\" />
+  </ItemGroup>
 </Project>

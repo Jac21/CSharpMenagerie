@@ -6,4 +6,10 @@
     <LangVersion>9</LangVersion>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Queues\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Queues\" />
+  </ItemGroup>
 </Project>
