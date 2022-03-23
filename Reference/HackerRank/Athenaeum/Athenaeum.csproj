@@ -8,8 +8,10 @@
 
   <ItemGroup>
     <None Remove="Queues\" />
+    <None Remove="BinarySearch\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Queues\" />
+    <Folder Include="BinarySearch\" />
   </ItemGroup>
 </Project>

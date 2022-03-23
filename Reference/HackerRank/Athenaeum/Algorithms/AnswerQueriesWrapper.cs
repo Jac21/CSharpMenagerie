@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Athenaeum.Algorithms
 {
-    public static class TestBed
+    public static class AnswerQueriesWrapper
     {
         public static int[] AnswerQueries(List<Query> queries, int N)
         {

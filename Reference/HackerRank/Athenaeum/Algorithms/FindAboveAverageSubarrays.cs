@@ -4,22 +4,8 @@ using System.Linq;
 
 namespace Athenaeum.Algorithms
 {
-    public class TestBedTwo
+    public class FindAboveAverageSubarrays
     {
-        public static int[] MergeSortedArraysWithoutDuplicates(int[] arr1, int[] arr2)
-        {
-            var mergedAndSortedList = new List<int>();
-
-            mergedAndSortedList.AddRange(arr1);
-
-            mergedAndSortedList.AddRange(arr2);
-
-            return mergedAndSortedList
-                .Distinct()
-                .OrderBy(x => x)
-                .ToArray();
-        }
-
         public static Subarray[] AboveAverageSubarrays(int[] A)
         {
             if (A.Length == 0) return Array.Empty<Subarray>();
