@@ -9,9 +9,11 @@
   <ItemGroup>
     <None Remove="Queues\" />
     <None Remove="BinarySearch\" />
+    <None Remove="Algorithms\Iterators\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Queues\" />
     <Folder Include="BinarySearch\" />
+    <Folder Include="Algorithms\Iterators\" />
   </ItemGroup>
 </Project>
