@@ -12,6 +12,10 @@ namespace Athenaeum.Algorithms.Iterators
     {
         private readonly Queue<IEnumerator<T>> iterqueue;
 
+        /// <summary>
+        /// O(k)
+        /// </summary>
+        /// <param name="iterlist"></param>
         public InterleavingFlattener(IEnumerator<T>[] iterlist)
         {
             iterqueue = new Queue<IEnumerator<T>>();
@@ -22,6 +26,10 @@ namespace Athenaeum.Algorithms.Iterators
             }
         }
 
+        /// <summary>
+        /// O(1)
+        /// </summary>
+        /// <returns></returns>
         public T Next()
         {
             if (!HasNext()) throw new ArgumentOutOfRangeException();
@@ -35,6 +43,10 @@ namespace Athenaeum.Algorithms.Iterators
             return val;
         }
 
+        /// <summary>
+        /// O(1)
+        /// </summary>
+        /// <returns></returns>
         public bool HasNext()
         {
             return iterqueue.Any();
