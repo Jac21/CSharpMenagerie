@@ -17,7 +17,7 @@
     <Folder Include="Queues\" />
     <Folder Include="BinarySearch\" />
     <Folder Include="Algorithms\Iterators\" />
-    <Folder Include="Math\" />
+    <Folder Include="Mathematics\" />
     <Folder Include="Cryptography\" />
   </ItemGroup>
 </Project>

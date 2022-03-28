@@ -28,7 +28,7 @@
   <ItemGroup>
     <Folder Include="Queues\" />
     <Folder Include="LinkedLists\" />
-    <Folder Include="Math\" />
+    <Folder Include="Mathematics\" />
     <Folder Include="Cryptography\" />
   </ItemGroup>
 </Project>
