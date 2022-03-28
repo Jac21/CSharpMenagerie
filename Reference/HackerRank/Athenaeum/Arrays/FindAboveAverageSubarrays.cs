@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Athenaeum.Algorithms
+namespace Athenaeum.Arrays
 {
     public class FindAboveAverageSubarrays
     {

@@ -1,7 +1,7 @@
-using Athenaeum.Algorithms;
+using Athenaeum.Mathematics;
 using NUnit.Framework;
 
-namespace HackerRank.Unit.Tests.Algorithms
+namespace HackerRank.Unit.Tests.Mathematics
 {
 
     public class PowerOfThreeTests

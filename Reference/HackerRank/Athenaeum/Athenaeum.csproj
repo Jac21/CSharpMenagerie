@@ -10,10 +10,14 @@
     <None Remove="Queues\" />
     <None Remove="BinarySearch\" />
     <None Remove="Algorithms\Iterators\" />
+    <None Remove="Math\" />
+    <None Remove="Cryptography\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Queues\" />
     <Folder Include="BinarySearch\" />
     <Folder Include="Algorithms\Iterators\" />
+    <Folder Include="Math\" />
+    <Folder Include="Cryptography\" />
   </ItemGroup>
 </Project>

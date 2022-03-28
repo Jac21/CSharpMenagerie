@@ -1,7 +1,7 @@
-using Athenaeum.Algorithms;
+using Athenaeum.Cryptography;
 using NUnit.Framework;
 
-namespace HackerRank.Unit.Tests.Algorithms
+namespace HackerRank.Unit.Tests.Cryptography
 {
 
     public class RotationalCipherTests

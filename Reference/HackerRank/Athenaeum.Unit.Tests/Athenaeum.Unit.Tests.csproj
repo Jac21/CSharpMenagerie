@@ -22,9 +22,13 @@
   <ItemGroup>
     <None Remove="Queues\" />
     <None Remove="LinkedLists\" />
+    <None Remove="Math\" />
+    <None Remove="Cryptography\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Queues\" />
     <Folder Include="LinkedLists\" />
+    <Folder Include="Math\" />
+    <Folder Include="Cryptography\" />
   </ItemGroup>
 </Project>

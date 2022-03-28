@@ -1,6 +1,6 @@
 using System;
 
-namespace Athenaeum.Algorithms
+namespace Athenaeum.Cryptography
 {
     public static class RotationalCipher
     {

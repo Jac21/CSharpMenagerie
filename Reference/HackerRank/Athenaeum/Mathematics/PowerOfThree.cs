@@ -1,4 +1,4 @@
-namespace Athenaeum.Algorithms
+namespace Athenaeum.Mathematics
 {
     public static class PowerOfThree
     {
