@@ -3,7 +3,6 @@ using NUnit.Framework;
 
 namespace HackerRank.Unit.Tests.Heaps
 {
-
     public class MedianStreamTests
     {
         [SetUp]
@@ -17,8 +16,8 @@ namespace HackerRank.Unit.Tests.Heaps
             // arrange
             var input = new[]
             {
-            5, 15, 1, 3
-        };
+                5, 15, 1, 3
+            };
 
             // act
             var result = MedianStream.FindMedian(input);
@@ -26,8 +25,8 @@ namespace HackerRank.Unit.Tests.Heaps
             // assert
             Assert.AreEqual(new[]
             {
-            5, 10, 5, 4
-        }, result);
+                5, 10, 5, 4
+            }, result);
         }
 
         [Test]
@@ -36,8 +35,8 @@ namespace HackerRank.Unit.Tests.Heaps
             // arrange
             var input = new[]
             {
-            1, 2
-        };
+                1, 2
+            };
 
             // act
             var result = MedianStream.FindMedian(input);
@@ -45,8 +44,8 @@ namespace HackerRank.Unit.Tests.Heaps
             // assert
             Assert.AreEqual(new[]
             {
-            1, 1
-        }, result);
+                1, 1
+            }, result);
         }
     }
 }
