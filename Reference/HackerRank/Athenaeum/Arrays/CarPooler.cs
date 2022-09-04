@@ -20,7 +20,7 @@ namespace Athenaeum.Arrays
                 stops[trip[2]] -= trip.FirstOrDefault();
             }
 
-            for (int stop = 0; stop <= 1000; stop++)
+            for (var stop = 0; stop <= 1000; stop++)
             {
                 capacity -= stops[stop];
 

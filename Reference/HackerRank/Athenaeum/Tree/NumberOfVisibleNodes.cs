@@ -16,7 +16,7 @@ namespace Athenaeum.Tree
 
             while (queue.Count > 0)
             {
-                int level = queue.Count;
+                var level = queue.Count;
 
                 while (level > 0)
                 {

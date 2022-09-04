@@ -40,7 +40,7 @@ namespace Athenaeum.Algorithms
             while (start < end)
             {
                 double total = 0;
-                int mid = start + (end - start) / 2;
+                var mid = start + (end - start) / 2;
 
                 // calculate mid value
                 foreach (var growthRate in growthRates)

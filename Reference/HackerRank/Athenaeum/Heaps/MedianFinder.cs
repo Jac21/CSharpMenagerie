@@ -19,13 +19,13 @@ namespace Athenaeum.Heaps
         {
             _minHeap.Enqueue(num, num);
 
-            int minHeapPeek = _minHeap.Dequeue();
+            var minHeapPeek = _minHeap.Dequeue();
 
             _maxHeap.Enqueue(minHeapPeek, minHeapPeek);
 
             if (_minHeap.Count < _maxHeap.Count)
             {
-                int maxHeapPeek = _maxHeap.Dequeue();
+                var maxHeapPeek = _maxHeap.Dequeue();
                 _minHeap.Enqueue(maxHeapPeek, maxHeapPeek);
             }
         }

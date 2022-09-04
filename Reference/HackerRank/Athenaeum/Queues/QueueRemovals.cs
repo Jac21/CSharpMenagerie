@@ -11,15 +11,15 @@ namespace Athenaeum.Queues
 
             x = Math.Min(x, arr.Length);
 
-            int[] result = new int[x];
+            var result = new int[x];
             int max;
-            int start = 0;
+            var start = 0;
 
             // O(x)
-            for (int i = 0; i < x; i++)
+            for (var i = 0; i < x; i++)
             {
-                int count = Math.Min(x, arr.Length - i);
-                int maxElementAt = start;
+                var count = Math.Min(x, arr.Length - i);
+                var maxElementAt = start;
 
                 max = arr[maxElementAt];
 

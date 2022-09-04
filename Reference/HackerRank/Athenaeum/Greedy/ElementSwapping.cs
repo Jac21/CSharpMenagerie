@@ -21,7 +21,7 @@ namespace Athenaeum.Greedy
             {
                 var minimumIndex = 0;
 
-                for (int i = 0; i < Math.Min(k + 1, arr.Length); i++)
+                for (var i = 0; i < Math.Min(k + 1, arr.Length); i++)
                 {
                     if (arr[i] < arr[minimumIndex])
                     {
@@ -33,7 +33,7 @@ namespace Athenaeum.Greedy
                 k -= minimumIndex;
                 result.Add(arr[minimumIndex]);
 
-                for (int i = 0; i < arr.Length; i++)
+                for (var i = 0; i < arr.Length; i++)
                 {
                     if (i != minimumIndex)
                     {

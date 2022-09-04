@@ -59,7 +59,7 @@ namespace Athenaeum.Graph
 
             while (i < index)
             {
-                int tmp = arr[i];
+                var tmp = arr[i];
                 arr[i] = arr[index - 1];
                 arr[index - 1] = tmp;
 

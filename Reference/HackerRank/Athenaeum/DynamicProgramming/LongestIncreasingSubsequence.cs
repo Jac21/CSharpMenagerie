@@ -18,7 +18,7 @@ namespace Athenaeum.DynamicProgramming
 
             for (var i = 1; i < nums.Length; i++)
             {
-                for (int j = 0; j < i; j++)
+                for (var j = 0; j < i; j++)
                 {
                     if (nums[i] > nums[j])
                     {

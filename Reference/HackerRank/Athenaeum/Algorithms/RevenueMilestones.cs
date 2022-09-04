@@ -19,7 +19,7 @@ namespace Athenaeum.Algorithms
             var totalRevenue = 0;
 
             // O(n)
-            for (int i = 0; i < revenues.Length; i++)
+            for (var i = 0; i < revenues.Length; i++)
             {
                 totalRevenue += revenues[i];
 

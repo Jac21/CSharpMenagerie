@@ -25,7 +25,7 @@ namespace Athenaeum.Heaps
                 arr[2]
             };
 
-            for (int i = 0; i < arr.Length; i++)
+            for (var i = 0; i < arr.Length; i++)
             {
                 // base cases
                 if (i is 0 or 1)

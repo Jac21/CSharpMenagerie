@@ -10,12 +10,12 @@ namespace Athenaeum.Arrays
 
             var output = new int[arr.Length];
 
-            for (int i = 0; i < output.Length; i++)
+            for (var i = 0; i < output.Length; i++)
             {
                 output[i] = 1;
             }
 
-            for (int i = 0; i < arr.Length; i++)
+            for (var i = 0; i < arr.Length; i++)
             {
                 var k = i;
 

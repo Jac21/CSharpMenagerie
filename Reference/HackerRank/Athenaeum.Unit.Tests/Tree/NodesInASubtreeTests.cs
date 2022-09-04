@@ -15,7 +15,7 @@ namespace HackerRank.Unit.Tests.Tree
         public void NumberOfVisibleNodes_SimpleCase_Success()
         {
             // arrange
-            TreeNode root = new TreeNode(8,
+            var root = new TreeNode(8,
                 new TreeNode(3, new TreeNode(1), new TreeNode(6, new TreeNode(4), new TreeNode(7))),
                 new TreeNode(10, null, new TreeNode(14, new TreeNode(13))));
 

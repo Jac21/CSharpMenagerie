@@ -17,7 +17,7 @@ namespace Athenaeum.Arrays
             {
                 for (var j = 0; j < m; j++)
                 {
-                    int liveNeighbors = DeriveLiveNeighborsCount(board, i, j, n, m);
+                    var liveNeighbors = DeriveLiveNeighborsCount(board, i, j, n, m);
 
                     var cell = board[i][j];
 
@@ -34,7 +34,7 @@ namespace Athenaeum.Arrays
 
             for (var i = 0; i < n; i++)
             {
-                for (int j = 0; j < m; j++)
+                for (var j = 0; j < m; j++)
                 {
                     var cell = board[i][j];
 
@@ -54,11 +54,11 @@ namespace Athenaeum.Arrays
 
         private static int DeriveLiveNeighborsCount(int[][] board, int i, int j, int n, int m)
         {
-            int liveNeighbors = 0;
+            var liveNeighbors = 0;
 
-            for (int x = Math.Max(0, i - 1); x < Math.Min(n, i + 2); x++)
+            for (var x = Math.Max(0, i - 1); x < Math.Min(n, i + 2); x++)
             {
-                for (int y = Math.Max(0, j - 1); y < Math.Min(m, j + 2); y++)
+                for (var y = Math.Max(0, j - 1); y < Math.Min(m, j + 2); y++)
                 {
                     if (board[x][y] >= 1)
                     {

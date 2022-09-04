@@ -4,7 +4,6 @@ using NUnit.Framework;
 
 namespace HackerRank.Unit.Tests.Tree
 {
-
     public class BinaryTreeInorderTraversalTests
     {
         private BinaryTreeInorderTraversal _binaryTreeInorderTraversal;

@@ -16,9 +16,9 @@ namespace Athenaeum.Arrays
 
             for (var i = 0; i < A.Length; i++)
             {
-                int currentSum = 0;
+                var currentSum = 0;
 
-                for (int j = i; j < A.Length; j++)
+                for (var j = i; j < A.Length; j++)
                 {
                     currentSum += A[j];
 

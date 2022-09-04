@@ -12,9 +12,9 @@ namespace Athenaeum.DynamicProgramming
 
             Array.Fill(dp, -1);
 
-            for (int i = 1; i <= amount; i++)
+            for (var i = 1; i <= amount; i++)
             {
-                foreach (int coin in coins)
+                foreach (var coin in coins)
                 {
                     // if coin matches i, we only need
                     // one coin for that amount

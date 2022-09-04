@@ -18,9 +18,9 @@ namespace Athenaeum.Strings
             var sToChar = s.ToCharArray();
             var tToChar = t.ToCharArray();
 
-            int matching = 0;
+            var matching = 0;
 
-            for (int i = 0; i < sToChar.Length; i++)
+            for (var i = 0; i < sToChar.Length; i++)
             {
                 if (sToChar[i] != tToChar[i])
                 {
