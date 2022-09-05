@@ -8,14 +8,13 @@
 
   <ItemGroup>
     <None Remove="Queues\" />
-    <None Remove="BinarySearch\" />
     <None Remove="Algorithms\Iterators\" />
     <None Remove="Math\" />
     <None Remove="Cryptography\" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="BinarySearch" />
     <Folder Include="Queues\" />
-    <Folder Include="BinarySearch\" />
     <Folder Include="Algorithms\Iterators\" />
     <Folder Include="Mathematics\" />
     <Folder Include="Cryptography\" />

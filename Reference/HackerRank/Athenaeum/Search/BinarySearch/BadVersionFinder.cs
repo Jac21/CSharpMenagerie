@@ -1,5 +1,6 @@
 ﻿using System;
-namespace Athenaeum.BinarySearch
+
+namespace Athenaeum.Search.BinarySearch
 {
     public static class BadVersionFinder
     {
