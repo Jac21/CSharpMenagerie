@@ -1,7 +1,8 @@
 ﻿using System;
+
 namespace Athenaeum.DynamicProgramming
 {
-    public class CoinChange
+    public static class CoinChange
     {
         public static int MakeCoinChange(int[] coins, int amount)
         {
@@ -30,7 +31,7 @@ namespace Athenaeum.DynamicProgramming
                         // 2. dp[i] does not have a solution yet
                         if (dp[i - coin] != -1 &&
                             ((dp[i] != -1 && dp[i] > dp[i - coin] + 1)
-                            || dp[i] == -1))
+                             || dp[i] == -1))
                         {
                             // set solution, take amount of coins, add one more coin
                             dp[i] = dp[i - coin] + 1;
@@ -40,6 +41,29 @@ namespace Athenaeum.DynamicProgramming
             }
 
             return dp[amount];
+        }
+
+        public static int MakeCoinChangeSecondSolution(int[] coins, int amount)
+        {
+            if (coins.Length == 0 || amount == 0) return 0;
+
+            // create array to store number of coints required to exchange
+            var d = new int[amount + 1];
+
+            for (int i = 1; i <= amount; i++)
+            {
+                d[i] = int.MaxValue;
+
+                for (int j = 0; j < coins.Length; j++)
+                {
+                    if (i >= coins[j] && d[i - coins[j]] != int.MaxValue)
+                    {
+                        d[i] = Math.Min(d[i], 1 + d[i - coins[j]]);
+                    }
+                }
+            }
+
+            return d[amount] == int.MaxValue ? -1 : d[amount];
         }
     }
 }
