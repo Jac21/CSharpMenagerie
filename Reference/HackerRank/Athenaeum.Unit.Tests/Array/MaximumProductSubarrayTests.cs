@@ -19,7 +19,7 @@ public class MaximumProductSubarrayTests
         var simpleCase = MaximumProductSubarray.MaxProduct(new[] {2, 3, -2, 4});
 
         // assert
-        Assert.AreEqual(simpleCase, 6);
+        Assert.AreEqual(6, simpleCase);
     }
 
     [Test]
@@ -31,6 +31,6 @@ public class MaximumProductSubarrayTests
         var simpleCase = MaximumProductSubarray.MaxProduct(new[] {-2, 0, -1});
 
         // assert
-        Assert.AreEqual(simpleCase, 0);
+        Assert.AreEqual(0, simpleCase);
     }
 }

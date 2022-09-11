@@ -19,7 +19,7 @@ public class MaxProfitFinderTests
         var simpleCase = MaxProfitFinder.MaxProfit(new[] {7, 1, 5, 3, 6, 4});
 
         // assert
-        Assert.AreEqual(simpleCase, 5);
+        Assert.AreEqual(5, simpleCase);
     }
 
     [Test]
@@ -31,6 +31,6 @@ public class MaxProfitFinderTests
         var simpleCase = MaxProfitFinder.MaxProfit(new[] {7, 6, 4, 3, 1});
 
         // assert
-        Assert.AreEqual(simpleCase, 0);
+        Assert.AreEqual(0, simpleCase);
     }
 }

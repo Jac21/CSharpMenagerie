@@ -22,7 +22,7 @@ namespace Athenaeum.Arrays
             var currentMinimum = firstEntry;
             var currentMaximum = firstEntry;
 
-            for (int i = 1; i < nums.Length; i++)
+            for (var i = 1; i < nums.Length; i++)
             {
                 if (nums[i] < 0)
                 {

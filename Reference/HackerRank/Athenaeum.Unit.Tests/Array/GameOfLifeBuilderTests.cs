@@ -14,12 +14,13 @@ namespace HackerRank.Unit.Tests.Array
         public void GameOfLifeBuilder_SimplerCase_Success()
         {
             // arrange
-            var input = new int[][] {
+            var input = new[]
+            {
                 new[] { 1,1},
                 new[] { 1,0},
             };
 
-            var output = new int[][]
+            var output = new[]
             {
                 new[] {1,1},
                 new[] {1,1}
@@ -36,14 +37,16 @@ namespace HackerRank.Unit.Tests.Array
         public void GameOfLifeBuilder_SimpleCase_Success()
         {
             // arrange
-            var input = new int[][] {
+            var input = new[]
+            {
                 new[] { 0,1,0},
                 new[] { 0,0,1},
                 new[] { 1,1,1},
                 new[] { 0,0,0}
             };
 
-            var output = new int[][] {
+            var output = new[]
+            {
                 new[] { 0,0,0},
                 new[] { 1,0,1},
                 new[] { 0,1,1},

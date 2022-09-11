@@ -19,7 +19,7 @@ public class SearchInRotatedSortedArrayTests
         var simpleCase = SearchInRotatedSortedArray.Search(new[] {4, 5, 6, 7, 0, 1, 2}, 0);
 
         // assert
-        Assert.AreEqual(simpleCase, 4);
+        Assert.AreEqual(4, simpleCase);
     }
 
     [Test]
@@ -31,7 +31,7 @@ public class SearchInRotatedSortedArrayTests
         var simpleCase = SearchInRotatedSortedArray.Search(new[] {4, 5, 6, 7, 0, 1, 2}, 3);
 
         // assert
-        Assert.AreEqual(simpleCase, -1);
+        Assert.AreEqual(-1, simpleCase);
     }
 
     [Test]
@@ -43,7 +43,7 @@ public class SearchInRotatedSortedArrayTests
         var simpleCase = SearchInRotatedSortedArray.Search(new[] {1}, 0);
 
         // assert
-        Assert.AreEqual(simpleCase, -1);
+        Assert.AreEqual(-1, simpleCase);
     }
 
     [Test]
@@ -55,7 +55,7 @@ public class SearchInRotatedSortedArrayTests
         var simpleCase = SearchInRotatedSortedArray.Search(new[] {1}, 1);
 
         // assert
-        Assert.AreEqual(simpleCase, 0);
+        Assert.AreEqual(0, simpleCase);
     }
 
     [Test]
@@ -67,6 +67,6 @@ public class SearchInRotatedSortedArrayTests
         var simpleCase = SearchInRotatedSortedArray.Search(new[] {1, 3}, 3);
 
         // assert
-        Assert.AreEqual(simpleCase, 1);
+        Assert.AreEqual(1, simpleCase);
     }
 }

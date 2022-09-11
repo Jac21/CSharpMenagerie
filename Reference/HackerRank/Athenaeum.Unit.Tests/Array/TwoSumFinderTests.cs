@@ -19,7 +19,7 @@ public class TwoSumFinderTests
         var simpleCase = TwoSumFinder.TwoSum(new[] {2, 7, 11, 15}, 9);
 
         // assert
-        Assert.AreEqual(simpleCase, new[] {0, 1});
+        Assert.AreEqual(new[] {0,1}, simpleCase);
     }
 
     [Test]
@@ -31,7 +31,7 @@ public class TwoSumFinderTests
         var simpleCase = TwoSumFinder.TwoSum(new[] {3, 2, 4}, 6);
 
         // assert
-        Assert.AreEqual(simpleCase, new[] {1, 2});
+        Assert.AreEqual(new[] {1, 2}, simpleCase);
     }
 
     [Test]
@@ -43,6 +43,6 @@ public class TwoSumFinderTests
         var simpleCase = TwoSumFinder.TwoSum(new[] {3, 3}, 6);
 
         // assert
-        Assert.AreEqual(simpleCase, new[] {0, 1});
+        Assert.AreEqual(new[] {0, 1}, simpleCase);
     }
 }

@@ -16,7 +16,7 @@ public class CourseSchedulerTests
         // arrange
 
         // act
-        var simpleCase = CourseScheduler.CanFinish(2, new int[][]
+        var simpleCase = CourseScheduler.CanFinish(2, new[]
         {
             new[] {1, 0}
         });
@@ -31,7 +31,7 @@ public class CourseSchedulerTests
         // arrange
 
         // act
-        var simpleCase = CourseScheduler.CanFinish(2, new int[][]
+        var simpleCase = CourseScheduler.CanFinish(2, new[]
         {
             new[] {1, 0},
             new[] {0, 1}

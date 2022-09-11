@@ -20,7 +20,7 @@ public class IntervalInserterTests
         var baseCase = IntervalInserter.Insert(System.Array.Empty<int[]>(), new[] {5, 7});
 
         // assert
-        Assert.AreEqual(new int[][]
+        Assert.AreEqual(new[]
         {
             new[] {5, 7},
         }, baseCase);
@@ -32,14 +32,14 @@ public class IntervalInserterTests
         // arrange
 
         // act
-        var simpleCase = IntervalInserter.Insert(new int[][]
+        var simpleCase = IntervalInserter.Insert(new[]
         {
             new[] {1, 3},
             new[] {6, 9}
         }, new[] {2, 5});
 
         // assert
-        Assert.AreEqual(new int[][]
+        Assert.AreEqual(new[]
         {
             new[] {1, 5},
             new[] {6, 9}
@@ -52,7 +52,7 @@ public class IntervalInserterTests
         // arrange
 
         // act
-        var simpleCase = IntervalInserter.Insert(new int[][]
+        var simpleCase = IntervalInserter.Insert(new[]
         {
             new[] {1, 2},
             new[] {3, 5},
@@ -62,7 +62,7 @@ public class IntervalInserterTests
         }, new[] {4, 8});
 
         // assert
-        Assert.AreEqual(new int[][]
+        Assert.AreEqual(new[]
         {
             new[] {1, 2},
             new[] {3, 10},

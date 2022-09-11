@@ -20,7 +20,7 @@ namespace HackerRank.Unit.Tests.Array
             var simpleCase = CandyDistributor.DistributeCandies(new[] { 1, 1, 2, 2, 3, 3 });
 
             // assert
-            Assert.AreEqual(simpleCase, 3);
+            Assert.AreEqual(3, simpleCase);
         }
 
         [Test]
@@ -32,7 +32,7 @@ namespace HackerRank.Unit.Tests.Array
             var simpleCase = CandyDistributor.DistributeCandies(new[] { 1, 1, 2, 3 });
 
             // assert
-            Assert.AreEqual(simpleCase, 2);
+            Assert.AreEqual(2, simpleCase);
         }
 
         [Test]
@@ -44,7 +44,7 @@ namespace HackerRank.Unit.Tests.Array
             var simpleCase = CandyDistributor.DistributeCandies(new[] { 6, 6, 6, 6 });
 
             // assert
-            Assert.AreEqual(simpleCase, 1);
+            Assert.AreEqual(1, simpleCase);
         }
     }
 }

@@ -10,13 +10,13 @@ namespace Athenaeum.Strings
 
             int length = 0, start = 0;
 
-            for (int i = 0; i < s.Length; i++)
+            for (var i = 0; i < s.Length; i++)
             {
-                int evenLength = FindPalindromeLength(s, i, i + 1);
+                var evenLength = FindPalindromeLength(s, i, i + 1);
 
-                int oddLength = FindPalindromeLength(s, i, i);
+                var oddLength = FindPalindromeLength(s, i, i);
 
-                int currentLength = Math.Max(evenLength, oddLength);
+                var currentLength = Math.Max(evenLength, oddLength);
 
                 if (currentLength > length)
                 {

@@ -28,7 +28,7 @@ namespace HackerRank.Unit.Tests.Tree
             var simpleCase = NodesInASubtree.CountOfNodes(treeNodeWrapper, queries, s);
 
             // assert
-            Assert.AreEqual(new int[] { 2 }, simpleCase);
+            Assert.AreEqual(new[] { 2 }, simpleCase);
         }
     }
 }

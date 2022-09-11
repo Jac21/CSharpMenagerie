@@ -19,7 +19,7 @@ public class MaximumSubarrayTests
         var simpleCase = MaximumSubarray.MaxSubArray(new[] {-2, 1, -3, 4, -1, 2, 1, -5, 4});
 
         // assert
-        Assert.AreEqual(simpleCase, 6);
+        Assert.AreEqual(6, simpleCase);
     }
 
     [Test]
@@ -31,7 +31,7 @@ public class MaximumSubarrayTests
         var simpleCase = MaximumSubarray.MaxSubArray(new[] {1});
 
         // assert
-        Assert.AreEqual(simpleCase, 1);
+        Assert.AreEqual(1, simpleCase);
     }
 
     [Test]
@@ -43,6 +43,6 @@ public class MaximumSubarrayTests
         var simpleCase = MaximumSubarray.MaxSubArray(new[] {5, 4, -1, 7, 8});
 
         // assert
-        Assert.AreEqual(simpleCase, 23);
+        Assert.AreEqual(23, simpleCase);
     }
 }

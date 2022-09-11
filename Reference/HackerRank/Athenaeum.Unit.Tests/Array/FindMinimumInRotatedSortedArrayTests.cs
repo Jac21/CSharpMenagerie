@@ -19,7 +19,7 @@ public class FindMinimumInRotatedSortedArrayTests
         var simpleCase = FindMinimumInRotatedSortedArray.FindMin(new[] {3, 4, 5, 1, 2});
 
         // assert
-        Assert.AreEqual(simpleCase, 1);
+        Assert.AreEqual(1,  simpleCase);
     }
 
     [Test]
@@ -31,7 +31,7 @@ public class FindMinimumInRotatedSortedArrayTests
         var simpleCase = FindMinimumInRotatedSortedArray.FindMin(new[] {4, 5, 6, 7, 0, 1, 2});
 
         // assert
-        Assert.AreEqual(simpleCase, 0);
+        Assert.AreEqual(0, simpleCase);
     }
 
     [Test]
@@ -43,6 +43,6 @@ public class FindMinimumInRotatedSortedArrayTests
         var simpleCase = FindMinimumInRotatedSortedArray.FindMin(new[] {11, 13, 15, 17});
 
         // assert
-        Assert.AreEqual(simpleCase, 11);
+        Assert.AreEqual(11, simpleCase);
     }
 }

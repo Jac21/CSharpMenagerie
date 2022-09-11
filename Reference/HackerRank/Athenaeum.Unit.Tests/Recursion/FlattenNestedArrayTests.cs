@@ -15,7 +15,7 @@ namespace HackerRank.Unit.Tests.Recursion
         {
             // arrange
             var source = new object[] {
-                "foo", 2, new int[] { 1, 2, 3, 4 }, "bar" };
+                "foo", 2, new[] { 1, 2, 3, 4 }, "bar" };
 
             // act
             var simpleCase = FlattenNestedArray.FlattenArray(source);
@@ -29,7 +29,7 @@ namespace HackerRank.Unit.Tests.Recursion
         {
             // arrange
             var source = new object[] {
-                "foo", 2, new int[] { 1, 2, 3, 4 }, "bar" };
+                "foo", 2, new[] { 1, 2, 3, 4 }, "bar" };
 
             // act
             var simpleCase = FlattenNestedArray.FlattenNestedArrayRecursive(source);
@@ -44,7 +44,7 @@ namespace HackerRank.Unit.Tests.Recursion
             // arrange
             var source = new object[]
             {
-                1, 8, new object[] {6, 2, new int[] {9}, 8}, 2, 6
+                1, 8, new object[] {6, 2, new[] {9}, 8}, 2, 6
             };
 
             // act
@@ -73,7 +73,7 @@ namespace HackerRank.Unit.Tests.Recursion
             };
 
             // act
-            var simpleCase = FlattenExtensions.Flatten(source);
+            var simpleCase = source.Flatten();
 
             // assert
             Assert.AreEqual(new object[] { 1, 8, 6, 2, 9, 8, 2, 6 }, simpleCase);

@@ -50,11 +50,11 @@ namespace Athenaeum.DynamicProgramming
             // create array to store number of coints required to exchange
             var d = new int[amount + 1];
 
-            for (int i = 1; i <= amount; i++)
+            for (var i = 1; i <= amount; i++)
             {
                 d[i] = int.MaxValue;
 
-                for (int j = 0; j < coins.Length; j++)
+                for (var j = 0; j < coins.Length; j++)
                 {
                     if (i >= coins[j] && d[i - coins[j]] != int.MaxValue)
                     {

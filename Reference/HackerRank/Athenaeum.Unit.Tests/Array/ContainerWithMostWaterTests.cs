@@ -19,7 +19,7 @@ public class ContainerWithMostWaterTests
         var simpleCase = ContainerWithMostWater.MaxArea(new[] {1, 8, 6, 2, 5, 4, 8, 3, 7});
 
         // assert
-        Assert.AreEqual(simpleCase, 49);
+        Assert.AreEqual(49, simpleCase);
     }
 
     [Test]
@@ -31,6 +31,6 @@ public class ContainerWithMostWaterTests
         var simpleCase = ContainerWithMostWater.MaxArea(new[] {1, 1});
 
         // assert
-        Assert.AreEqual(simpleCase, 1);
+        Assert.AreEqual(1, simpleCase);
     }
 }

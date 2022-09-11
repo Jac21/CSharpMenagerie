@@ -19,7 +19,7 @@ public class DuplicateFinderTests
         var simpleCase = DuplicateFinder.ContainsDuplicate(new[] {1, 2, 3, 1});
 
         // assert
-        Assert.AreEqual(simpleCase, true);
+        Assert.AreEqual(true, simpleCase);
     }
 
     [Test]
@@ -31,7 +31,7 @@ public class DuplicateFinderTests
         var simpleCase = DuplicateFinder.ContainsDuplicate(new[] {1, 2, 3, 4});
 
         // assert
-        Assert.AreEqual(simpleCase, false);
+        Assert.AreEqual(false, simpleCase);
     }
 
     [Test]
@@ -43,6 +43,6 @@ public class DuplicateFinderTests
         var simpleCase = DuplicateFinder.ContainsDuplicate(new[] {1, 1, 1, 3, 3, 4, 3, 2, 4, 2});
 
         // assert
-        Assert.AreEqual(simpleCase, true);
+        Assert.AreEqual(true, simpleCase);
     }
 }

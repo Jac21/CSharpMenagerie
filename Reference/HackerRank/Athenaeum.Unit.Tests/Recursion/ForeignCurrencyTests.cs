@@ -17,7 +17,7 @@ namespace HackerRank.Unit.Tests.Recursion
             // arrange
             const int targetMoney = 94;
 
-            var denominations = new int[]
+            var denominations = new[]
             {
                 5,10,25,100,200
             };
@@ -35,7 +35,7 @@ namespace HackerRank.Unit.Tests.Recursion
             // arrange
             const int targetMoney = 75;
 
-            var denominations = new int[]
+            var denominations = new[]
             {
                 4,17,29
             };

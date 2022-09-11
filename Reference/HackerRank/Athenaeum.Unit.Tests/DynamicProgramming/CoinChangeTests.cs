@@ -6,6 +6,7 @@ namespace HackerRank.Unit.Tests.DynamicProgramming
 {
     public class CoinChangeTests
     {
+        [SetUp]
         public void Setup()
         {
         }

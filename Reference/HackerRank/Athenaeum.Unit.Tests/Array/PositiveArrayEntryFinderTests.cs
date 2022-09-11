@@ -19,7 +19,7 @@ public class PositiveArrayEntryFinderTests
         var simpleCase = PositiveArrayEntryFinder.Solution(new[] {1, 3, 6, 4, 1, 2});
 
         // assert
-        Assert.AreEqual(simpleCase, 5);
+        Assert.AreEqual(5, simpleCase);
     }
 
     [Test]
@@ -31,7 +31,7 @@ public class PositiveArrayEntryFinderTests
         var simpleCase = PositiveArrayEntryFinder.Solution(new[] {1, 2, 3});
 
         // assert
-        Assert.AreEqual(simpleCase, 4);
+        Assert.AreEqual(4, simpleCase);
     }
 
     [Test]
@@ -43,6 +43,6 @@ public class PositiveArrayEntryFinderTests
         var simpleCase = PositiveArrayEntryFinder.Solution(new[] {-1, -3});
 
         // assert
-        Assert.AreEqual(simpleCase, 1);
+        Assert.AreEqual(1, simpleCase);
     }
 }

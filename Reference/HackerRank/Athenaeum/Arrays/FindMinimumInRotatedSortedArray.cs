@@ -19,7 +19,7 @@ namespace Athenaeum.Arrays
 
             while (low < high)
             {
-                int mid = low + (high - low) / 2;
+                var mid = low + (high - low) / 2;
 
                 if (nums[low] < nums[high]) return nums[low];
 
