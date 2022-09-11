@@ -3,7 +3,6 @@ using NUnit.Framework;
 
 namespace HackerRank.Unit.Tests.Algorithms
 {
-
     public class BillionUsersTests
     {
         [SetUp]
@@ -17,8 +16,8 @@ namespace HackerRank.Unit.Tests.Algorithms
             // arrange
             var growthRates = new[]
             {
-            1.5f
-        };
+                1.5f
+            };
 
             // act
             var result = BillionUsers.GetBillionUsersDayIterative(growthRates);
@@ -33,8 +32,8 @@ namespace HackerRank.Unit.Tests.Algorithms
             // arrange
             var growthRates = new[]
             {
-            1.1f, 1.2f, 1.3f
-        };
+                1.1f, 1.2f, 1.3f
+            };
 
             // act
             var result = BillionUsers.GetBillionUsersDayIterative(growthRates);
@@ -49,8 +48,8 @@ namespace HackerRank.Unit.Tests.Algorithms
             // arrange
             var growthRates = new[]
             {
-            1.01f, 1.02f
-        };
+                1.01f, 1.02f
+            };
 
             // act
             var result = BillionUsers.GetBillionUsersDayIterative(growthRates);
@@ -65,8 +64,8 @@ namespace HackerRank.Unit.Tests.Algorithms
             // arrange
             var growthRates = new[]
             {
-            1.5f
-        };
+                1.5f
+            };
 
             // act
             var result = BillionUsers.GetBillionUsersDayBinary(growthRates);
@@ -81,8 +80,8 @@ namespace HackerRank.Unit.Tests.Algorithms
             // arrange
             var growthRates = new[]
             {
-            1.1f, 1.2f, 1.3f
-        };
+                1.1f, 1.2f, 1.3f
+            };
 
             // act
             var result = BillionUsers.GetBillionUsersDayBinary(growthRates);
