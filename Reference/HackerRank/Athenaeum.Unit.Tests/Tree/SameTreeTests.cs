@@ -3,7 +3,6 @@ using NUnit.Framework;
 
 namespace HackerRank.Unit.Tests.Tree
 {
-
     public class SameTreeTests
     {
         [SetUp]

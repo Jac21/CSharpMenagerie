@@ -1,9 +1,5 @@
-using System;
-
 namespace Athenaeum.Tree
 {
-    // Definition for a binary tree node.
-
     public static class SameTree
     {
         public static bool IsSameTree(TreeNode p, TreeNode q)

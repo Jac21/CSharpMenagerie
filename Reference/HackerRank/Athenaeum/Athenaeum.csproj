@@ -13,7 +13,6 @@
     <None Remove="Cryptography\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="BinarySearch" />
     <Folder Include="Queues\" />
     <Folder Include="Algorithms\Iterators\" />
     <Folder Include="Mathematics\" />
