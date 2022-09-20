@@ -1,23 +1,5 @@
 namespace Athenaeum.LinkedLists
 {
-    public class ListNode
-    {
-        public int Data;
-
-        public ListNode? Next;
-
-        public ListNode(int data)
-        {
-            Data = data;
-        }
-
-        public ListNode(int data, ListNode next)
-        {
-            Data = data;
-            Next = next;
-        }
-    }
-
     public static class ReverseOperations
     {
         public static ListNode Reverse(ListNode head)
@@ -31,7 +13,7 @@ namespace Athenaeum.LinkedLists
                 var start = curr;
 
                 while (curr != null &&
-                    curr.Data % 2 == 0)
+                       curr.Val % 2 == 0)
                 {
                     curr = curr.Next;
                 }
@@ -51,7 +33,7 @@ namespace Athenaeum.LinkedLists
             return dummyNode.Next;
         }
 
-        private static ListNode? ReverseSublist(ListNode start, ListNode? end)
+        private static ListNode ReverseSublist(ListNode start, ListNode? end)
         {
             var prev = end;
             var curr = start;
