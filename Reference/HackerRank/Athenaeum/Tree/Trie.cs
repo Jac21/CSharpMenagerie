@@ -9,6 +9,11 @@ namespace Athenaeum.Tree
             _head = new TrieNode();
         }
 
+        /// <summary>
+        /// O(N) where N is the length of the word
+        /// O(N) where N is the length of thr word
+        /// </summary>
+        /// <param name="word"></param>
         public void Insert(string word)
         {
             var current = _head;
@@ -21,6 +26,11 @@ namespace Athenaeum.Tree
             current.Tail = true;
         }
 
+        /// <summary>
+        /// O(N) where N is the length of the word
+        /// O(N) where N is the length of thr word
+        /// </summary>
+        /// <param name="word"></param>
         public bool Search(string word)
         {
             var node = SearchToTail(word);

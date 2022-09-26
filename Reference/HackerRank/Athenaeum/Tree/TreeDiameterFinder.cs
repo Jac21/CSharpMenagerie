@@ -11,6 +11,7 @@ namespace Athenaeum.Tree
     {
         /// <summary>
         /// O(N)
+        /// O(N) for recursive call stack
         /// </summary>
         /// <param name="node"></param>
         /// <returns></returns>

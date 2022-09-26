@@ -5,6 +5,12 @@ namespace Athenaeum.Tree
 {
     public class BinaryTreeHorizontalView
     {
+        /// <summary>
+        /// O(N)
+        /// O(N)
+        /// </summary>
+        /// <param name="root"></param>
+        /// <returns></returns>
         public IList<int> HorizontalView(TreeNode root)
         {
             var results = new List<int>();

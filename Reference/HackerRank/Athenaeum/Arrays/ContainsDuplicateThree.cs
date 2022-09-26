@@ -5,6 +5,13 @@ namespace Athenaeum.Arrays
 {
     public static class ContainsDuplicateThree
     {
+        /// <summary>
+        /// O(N * N)
+        /// </summary>
+        /// <param name="nums"></param>
+        /// <param name="indexDiff"></param>
+        /// <param name="valueDiff"></param>
+        /// <returns></returns>
         public static bool ContainsNearbyAlmostDuplicate(int[] nums, int indexDiff, int valueDiff)
         {
             if (nums.Length == 0) return false;

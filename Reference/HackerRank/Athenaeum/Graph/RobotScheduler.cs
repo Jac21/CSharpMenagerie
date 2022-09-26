@@ -4,6 +4,13 @@ namespace Athenaeum.Graph
 {
     public static class RobotScheduler
     {
+        /// <summary>
+        /// O(V+E) time complexity for DFS implementation
+        /// O(V) for stack containing space
+        /// </summary>
+        /// <param name="components"></param>
+        /// <param name="schedule"></param>
+        /// <returns></returns>
         public static bool CanSchedule(int components, int[][] schedule)
         {
             if (components == 0 || schedule.Length == 0) return false;

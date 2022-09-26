@@ -2,6 +2,12 @@ namespace Athenaeum.Arrays
 {
     public static class NumberOfIslands
     {
+        /// <summary>
+        /// O(M * N)
+        /// O(M * N) + O(M * N) for stack
+        /// </summary>
+        /// <param name="grid"></param>
+        /// <returns></returns>
         public static int NumIslands(char[][] grid)
         {
             if (grid == null || grid.Length == 0) return 0;
