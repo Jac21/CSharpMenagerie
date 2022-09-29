@@ -5,6 +5,12 @@ namespace Athenaeum.Graph
 {
     public static class CourseScheduler
     {
+        /// <summary>
+        /// O(N * P)
+        /// </summary>
+        /// <param name="numCourses"></param>
+        /// <param name="prerequisites"></param>
+        /// <returns></returns>
         public static bool CanFinish(int numCourses, int[][] prerequisites)
         {
             var graph = new List<int>[numCourses];
