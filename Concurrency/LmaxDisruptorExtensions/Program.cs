@@ -1,4 +1,5 @@
 ﻿// See https://aka.ms/new-console-template for more information
+// https://github.com/disruptor-net/Disruptor-net
 
 using System.Diagnostics;
 using Disruptor;
@@ -10,7 +11,7 @@ using LmaxDisruptorExtensions.Wrappers;
 
 Console.WriteLine("Hello, Disruptor!");
 
-const int ringBufferSize = 1024;
+const int ringBufferSize = 1_024;
 var taskScheduler = TaskScheduler.Default;
 const ProducerType producerType = ProducerType.Single;
 var blockingWaitStrategy = new BlockingWaitStrategy();
@@ -22,27 +23,33 @@ var wrapper = new InitializableEventDisruptorWrapper<IInitializableEvent>(disrup
 
 wrapper.StartConsumerChain(new SampleEventHandler(), new SampleEventHandlerDuplicate());
 
-var random = new Random();
-
-TimeAndLog(() =>
+TimeAndSizeAndLog(() =>
 {
-    for (var i = 0; i < 100_000; i++)
+    var random = new Random();
+
+    for (var i = 0; i < 100_000_000; i++)
     {
         wrapper.Produce(i, random.NextDouble());
     }
-    
+
     disruptor.Shutdown();
 });
 
 Console.WriteLine("fin");
 Console.ReadLine();
 
-void TimeAndLog(Action action)
+void TimeAndSizeAndLog(Action action)
 {
+    var startMemory = GC.GetTotalMemory(true);
     var stopwatch = Stopwatch.StartNew();
 
     action();
 
     stopwatch.Stop();
-    Console.WriteLine($"{nameof(TimeAndLog)}: Elapsed time in milliseconds - {stopwatch.Elapsed.TotalMilliseconds}");
+    Console.WriteLine($"{nameof(TimeAndSizeAndLog)}: Elapsed time in total seconds - {stopwatch.Elapsed.TotalSeconds}");
+
+    var totalMemory = GC.GetTotalMemory(false) - startMemory;
+    var usedMemoryMedian = totalMemory / 1_000_000D;
+
+    Console.WriteLine($"Allocated memory in MB: {usedMemoryMedian}");
 }
