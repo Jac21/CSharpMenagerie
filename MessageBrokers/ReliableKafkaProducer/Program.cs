@@ -10,6 +10,7 @@ using Confluent.SchemaRegistry;
 using Confluent.SchemaRegistry.Serdes;
 using ReliableKafkaProducer.Core;
 using ReliableKafkaProducer.Enums;
+using ReliableKafkaProducer.Messages;
 using ReliableKafkaProducer.Models;
 
 namespace ReliableKafkaProducer
@@ -18,15 +19,8 @@ namespace ReliableKafkaProducer
     /// https://github.com/confluentinc/confluent-kafka-dotnet
     /// https://github.com/rahulrai-in/kafka-lms
     /// </summary>
-    public class Program
+    public static class Program
     {
-        public struct KafkaMessage
-        {
-            public string Key;
-            public int Partition;
-            public LeaveApplicationReceived Message;
-        };
-
         public static async Task Main(string[] args)
         {
             Console.WriteLine("Hello, Kafka!");
@@ -58,7 +52,7 @@ namespace ReliableKafkaProducer
                 });
             }
             catch (CreateTopicsException e) when (e.Results.Select(r => r.Error.Code)
-                .Any(el => el == ErrorCode.TopicAlreadyExists))
+                                                      .Any(el => el == ErrorCode.TopicAlreadyExists))
             {
                 Console.WriteLine($"Topic {e.Results[0].Topic} already exists");
             }
