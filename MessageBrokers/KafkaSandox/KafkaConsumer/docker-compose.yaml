@@ -1,0 +1,15 @@
+version: "3.8"
+
+networks:
+  app-tier:
+    driver: bridge
+
+services:
+  consumer-service:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    networks:
+      - app-tier
+    ports:
+      - "7234:80"
