@@ -9,7 +9,9 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
     networks:
       - app-tier
     ports:
-      - "7198:80"
+      - "5123:80"
