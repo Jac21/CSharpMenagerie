@@ -5,6 +5,37 @@ networks:
     driver: bridge
 
 services:
+  zookeeper:
+    image: docker.io/bitnami/zookeeper:latest
+    networks:
+      - app-tier
+    ports:
+      - "2181:2181"
+    volumes:
+      - "zookeeper_data:/bitnami"
+    environment:
+      - ALLOW_ANONYMOUS_LOGIN=yes
+  kafka:
+    image: docker.io/bitnami/kafka:latest
+    networks:
+      - app-tier
+    ports:
+      - "9092:9092"
+    volumes:
+      - /tmp/kafka-persistence/bitnami/kafka
+    environment:
+      - KAFKA_BROKER_ID=1
+      - KAFKA_CFG_LISTENERS=PLAINTEXT://:9092
+      - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://kafka:9092
+      - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
+      - ALLOW_PLAINTEXT_LISTENER=yes
+    depends_on:
+      - zookeeper
+    healthcheck:
+      test: [ "CMD", "kafka-topics.sh", "--list", "--bootstrap-server", "kafka:9092" ]
+      interval: 5s
+      timeout: 10s
+      retries: 10
   consumer-service:
     build:
       context: .
@@ -15,3 +46,12 @@ services:
       - app-tier
     ports:
       - "5135:80"
+    depends_on:
+      kafka:
+        condition: service_healthy
+
+volumes:
+  zookeeper_data:
+    driver: local
+  kafka_data:
+    driver: local

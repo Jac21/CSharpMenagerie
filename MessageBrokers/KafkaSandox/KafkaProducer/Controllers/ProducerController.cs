@@ -10,7 +10,7 @@ namespace KafkaProducer.Controllers;
 [Route("[controller]")]
 public class ProducerController : ControllerBase
 {
-    private const string BootstrapServers = "localhost:9092";
+    private const string DockerBootstrapServers = "kafka:9092";
 
     private const string Topic = "testtopic";
 
@@ -36,7 +36,7 @@ public class ProducerController : ControllerBase
     {
         var config = new ProducerConfig
         {
-            BootstrapServers = BootstrapServers,
+            BootstrapServers = DockerBootstrapServers,
             ClientId = Dns.GetHostName()
         };
 
@@ -50,8 +50,10 @@ public class ProducerController : ControllerBase
             });
 
             _logger.LogInformation(
-                "{ProducerControllerName}.{SendOrderRequestName}: Delivery Timestamp - {TimestampUtcDateTime}",
-                nameof(ProducerController), nameof(SendOrderRequest), result.Timestamp.UtcDateTime);
+                "{ProducerControllerName}.{SendOrderRequestName}: Delivered {ResultMessage} to topic {ResultTopic} in partition {ResultPartition} at Timestamp {TimestampUtcDateTime}",
+                nameof(ProducerController), nameof(SendOrderRequest), result.Message.Value, result.Topic,
+                result.Partition,
+                result.Timestamp.UtcDateTime);
 
             return await Task.FromResult(true);
         }

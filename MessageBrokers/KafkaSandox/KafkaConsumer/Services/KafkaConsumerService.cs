@@ -8,7 +8,7 @@ public class KafkaConsumerService : IHostedService
 {
     private const string Topic = "testtopic";
     private const string GroupId = "test_group";
-    private const string BootstrapServers = "localhost:9092";
+    private const string DockerBootstrapServers = "kafka:9092";
 
     private readonly ILogger<KafkaConsumerService> _logger;
 
@@ -21,18 +21,23 @@ public class KafkaConsumerService : IHostedService
 
     public Task StartAsync(CancellationToken cancellationToken)
     {
+        _logger.LogInformation($"{nameof(KafkaConsumerService)}: Calling {nameof(StartAsync)}");
+
         var config = new ConsumerConfig
         {
             GroupId = GroupId,
-            BootstrapServers = BootstrapServers,
-            AutoOffsetReset = AutoOffsetReset.Earliest
+            BootstrapServers = DockerBootstrapServers,
+            AutoOffsetReset = AutoOffsetReset.Earliest,
+            AllowAutoCreateTopics = true
         };
 
         try
         {
             using var consumerBuilder = new ConsumerBuilder
                 <Ignore, string>(config).Build();
+
             consumerBuilder.Subscribe(Topic);
+
             var cancelToken = new CancellationTokenSource();
 
             try
