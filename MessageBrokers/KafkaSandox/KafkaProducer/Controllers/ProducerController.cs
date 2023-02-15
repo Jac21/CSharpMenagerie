@@ -10,6 +10,10 @@ namespace KafkaProducer.Controllers;
 [Route("[controller]")]
 public class ProducerController : ControllerBase
 {
+    private ProducerConfig _config;
+
+    private const string LocalBootstrapServers = "localhost:9092";
+
     private const string DockerBootstrapServers = "kafka:9092";
 
     private const string Topic = "testtopic";
@@ -34,15 +38,27 @@ public class ProducerController : ControllerBase
     private async Task<bool> SendOrderRequest
         (string topic, string message)
     {
-        var config = new ProducerConfig
+        _config = new ProducerConfig
         {
-            BootstrapServers = DockerBootstrapServers,
-            ClientId = Dns.GetHostName()
+            BootstrapServers = LocalBootstrapServers,
+            EnableDeliveryReports = true,
+            ClientId = Dns.GetHostName(),
+            Debug = "msg",
+            // retry settings:
+            Acks = Acks.All,
+            MessageSendMaxRetries = 3,
+            RetryBackoffMs = 1000,
+            EnableIdempotence = true
         };
 
         try
         {
-            using var producer = new ProducerBuilder<Null, string>(config).Build();
+            using var producer = new ProducerBuilder<Null, string>(_config)
+                .SetLogHandler((_, logMessage) =>
+                    Console.WriteLine(
+                        $"Facility: {logMessage.Facility}-{logMessage.Level} Message: {logMessage.Message}"))
+                .SetErrorHandler((_, e) => Console.WriteLine($"Error: {e.Reason}. Is Fatal: {e.IsFatal}"))
+                .Build();
 
             var result = await producer.ProduceAsync(topic, new Message<Null, string>
             {
@@ -54,6 +70,14 @@ public class ProducerController : ControllerBase
                 nameof(ProducerController), nameof(SendOrderRequest), result.Message.Value, result.Topic,
                 result.Partition,
                 result.Timestamp.UtcDateTime);
+
+            if (result.Status != PersistenceStatus.Persisted)
+            {
+                // delivery might have failed after retries. This message requires manual processing.
+                _logger.LogWarning(
+                    "ERROR: Message not ack\'d by all brokers (value: \'{Message}\'). Delivery status: {ResultStatus}",
+                    message, result.Status);
+            }
 
             return await Task.FromResult(true);
         }

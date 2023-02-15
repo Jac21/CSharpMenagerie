@@ -8,6 +8,8 @@ public class KafkaConsumerService : IHostedService
 {
     private const string Topic = "testtopic";
     private const string GroupId = "test_group";
+
+    private const string LocalBootstrapServers = "localhost:9092";
     private const string DockerBootstrapServers = "kafka:9092";
 
     private readonly ILogger<KafkaConsumerService> _logger;
@@ -26,7 +28,7 @@ public class KafkaConsumerService : IHostedService
         var config = new ConsumerConfig
         {
             GroupId = GroupId,
-            BootstrapServers = DockerBootstrapServers,
+            BootstrapServers = LocalBootstrapServers,
             AutoOffsetReset = AutoOffsetReset.Earliest,
             AllowAutoCreateTopics = true
         };
