@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  dockerexample:
+    image: ${DOCKER_REGISTRY-}dockerexample
+    build:
+      context: .
+      dockerfile: DockerExample/Dockerfile
