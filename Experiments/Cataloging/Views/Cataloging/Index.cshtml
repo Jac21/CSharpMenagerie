@@ -1,0 +1,21 @@
+@model List<CatalogingInfoModel>
+
+@{
+    ViewBag.Title = "Cataloging";
+    Layout = "_Layout";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Cataloging</h1>
+</div>
+
+<table>
+    @foreach (var controller in Model)
+    {
+        <tr>
+            <td>@controller.Type.FullName</td>
+            <td>@controller.Actions.Select(x => x.Name).FirstOrDefault()</td>
+            <td>@controller.Constructor.Name</td>
+        </tr>
+    }
+</table>
