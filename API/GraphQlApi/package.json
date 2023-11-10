@@ -11,7 +11,7 @@
     "webpack": "webpack --progress"
   },
   "dependencies": {
-    "axios": "^0.21.2",
+    "axios": "^1.6.0",
     "graphiql": "1.4.7",
     "graphql": "^14.0.2",
     "react": "^16.2.0",
