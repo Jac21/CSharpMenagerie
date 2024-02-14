@@ -4,7 +4,7 @@ using Crdts.Domain.Registers.Implementations;
 
 Console.WriteLine("Hello, CRDTs!");
 
-var lastWriteWinsRegister = new LastWriteWinsRegister<int>("1", ("2", 0, 1));
+var lastWriteWinsRegister = new LastWriteWinsRegister<int, (string, int, int)>("1", ("2", 0, 1));
 
 lastWriteWinsRegister.Set(2);
 lastWriteWinsRegister.Set(3);

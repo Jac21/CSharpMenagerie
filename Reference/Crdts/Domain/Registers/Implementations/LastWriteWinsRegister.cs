@@ -1,6 +1,8 @@
+using Crdts.Domain.Interfaces;
+
 namespace Crdts.Domain.Registers.Implementations;
 
-public class LastWriteWinsRegister<T>
+public class LastWriteWinsRegister<T, TS> : ICrdt<T, TS>
 {
     private readonly string _id;
 
@@ -31,5 +33,14 @@ public class LastWriteWinsRegister<T>
             return;
 
         _state = mergeState;
+    }
+
+    // TODO - Implement
+    public T Value { get; set; }
+    public TS State { get; set; }
+
+    public void Merge(TS state)
+    {
+        throw new NotImplementedException();
     }
 }
