@@ -27,6 +27,6 @@
     "ignore-loader": "^0.1.2",
     "postcss-loader": "^7.2.4",
     "style-loader": "^0.19.1",
-    "webpack": "^3.10.0"
+    "webpack": "^5.94.0"
   }
 }
