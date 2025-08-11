@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PerfScratchpad", "PerfScratchpad.csproj", "{51BB629E-EDEA-47EF-84C7-D57F4AE7416C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{51BB629E-EDEA-47EF-84C7-D57F4AE7416C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51BB629E-EDEA-47EF-84C7-D57F4AE7416C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51BB629E-EDEA-47EF-84C7-D57F4AE7416C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51BB629E-EDEA-47EF-84C7-D57F4AE7416C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
