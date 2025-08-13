@@ -8,3 +8,4 @@ Console.WriteLine("Hello, Benchmarks!");
 BenchmarkRunner.Run<BlockingCollectionBenchmarker>();
 BenchmarkRunner.Run<ArrayPooledBlockingCollectionBenchmarker>();
 BenchmarkRunner.Run<ChannelBenchmarker>();
+BenchmarkRunner.Run<DataflowBenchmarker>();

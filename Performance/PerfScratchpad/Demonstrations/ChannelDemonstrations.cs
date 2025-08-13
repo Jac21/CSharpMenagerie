@@ -20,6 +20,8 @@ public static class ChannelDemonstrations
         });
 
         // consumer
-        await foreach (var _ in channel.Reader.ReadAllAsync()) { }
+        await foreach (var _ in channel.Reader.ReadAllAsync())
+        {
+        }
     }
 }
