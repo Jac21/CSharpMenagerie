@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "axios": "^1.16.0",
-    "graphiql": "1.4.7",
+    "graphiql": "5.2.4",
     "graphql": "^14.0.2",
     "react": "^16.2.0",
     "react-dom": "^16.2.0"
